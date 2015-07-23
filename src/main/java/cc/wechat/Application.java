@@ -5,26 +5,16 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import cc.wechat.config.WebappConfig;
-import cc.wechat.sdk.mp.api.WxMpInMemoryConfigStorage;
-import cc.wechat.sdk.mp.api.WxMpService;
-import cc.wechat.sdk.mp.api.WxMpServiceImpl;
-import cc.wechat.sdk.mp.rest.WeixinApi;
-import cc.wechat.sdk.mp.rest.entity.msg.send.BaseSendMsg;
-import cc.wechat.sdk.mp.rest.entity.msg.send.Text;
-import cc.wechat.sdk.mp.rest.entity.msg.send.TextSendMsg;
+import cc.wechat.config.AppConfig;
 
 
 @SpringBootApplication
 @EnableScheduling
-@Import(WebappConfig.class)
+@Import(AppConfig.class)
 public class Application {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
@@ -43,18 +33,6 @@ public class Application {
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Application.class, args);
-		WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-		config.setAccessToken(TOKEN);
-		config.setAppId(APP_ID);
-		config.setSecret(APP_SECRET);
-		WxMpService wxMpService = new WxMpServiceImpl();
-	    wxMpService.setWxMpConfigStorage(config);
-	    
-	    TextSendMsg sendMsg = new TextSendMsg();
-		sendMsg.setTouser("oODT9jpg8GZG90ewWP3QPDjlKhVE");
-		sendMsg.setMsgtype("text");
-		sendMsg.setText(new Text("aaaaa"));
-		BaseSendMsg result = WeixinApi.ForSendMsg.customSend(sendMsg);
 	}
 	
 }
