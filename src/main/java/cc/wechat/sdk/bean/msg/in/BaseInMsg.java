@@ -4,6 +4,11 @@ import cc.wechat.sdk.bean.msg.BaseMsg;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * api请求返回结果基类
+ * @author weny
+ * @datetime 2015年7月24日 上午10:57:51
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseInMsg extends BaseMsg{
 	

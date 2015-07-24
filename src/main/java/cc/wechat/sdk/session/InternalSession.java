@@ -6,7 +6,7 @@ public interface InternalSession {
    * Return the <code>HttpSession</code> for which this object
    * is the facade.
    */
-  WxSession getSession();
+  IWechatSession getSession();
 
   /**
    * Set the <code>isValid</code> flag for this session.

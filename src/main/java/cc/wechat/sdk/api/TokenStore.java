@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import cc.wechat.sdk.bean.Token;
+import cc.wechat.sdk.bean.msg.in.Token;
 import cc.wechat.sdk.exception.FailedToGetTokenException;
 
 /**
@@ -24,21 +24,21 @@ public class TokenStore {
 	 * @return
 	 * @throws FailedToGetTokenException 
 	 */
-	public static String getTOKEN() throws FailedToGetTokenException {
+	public static String get() throws FailedToGetTokenException {
 		if(StringUtils.isEmpty(token)) {
-			refreshToken();
+			refresh();
 		}
 		return token;
 	}
 	
 	/**
-	 * 每隔2小时刷新一次
+	 * 每隔2小时（115分钟）刷新一次
 	 * @return
 	 * @throws FailedToGetTokenException 
 	 */
-	@Scheduled(fixedRate = 1000 * 60 * 60 * 2)
-	private static void refreshToken() throws FailedToGetTokenException {
-		Token tokenEntity = WeixinApi.ForToken.getAccessToken();
+	@Scheduled(fixedRate = 1000 * 60 * 115)
+	private static void refresh() throws FailedToGetTokenException {
+		Token tokenEntity = WechatApi.ForToken.getAccessToken();
 		token = tokenEntity.getAccess_token();
 		logger.debug(String.format("RefreshToken Successfully, New Token is [%s]", token));
 	}

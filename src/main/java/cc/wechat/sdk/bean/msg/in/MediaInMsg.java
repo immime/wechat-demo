@@ -1,6 +1,7 @@
 package cc.wechat.sdk.bean.msg.in;
 
 
+
 /**
  * 封装上传素材时来自微信官方的http响应
  * 

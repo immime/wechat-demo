@@ -4,12 +4,19 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.session.MapSession;
+import org.springframework.session.Session;
+import org.springframework.session.SessionRepository;
 
 import cc.wechat.config.AppConfig;
+import cc.wechat.config.SessionManager;
+import cc.wechat.sdk.session.IWechatSession;
+import cc.wechat.sdk.session.WechatSession;
 
 
 @SpringBootApplication
@@ -18,9 +25,9 @@ import cc.wechat.config.AppConfig;
 public class Application {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
-	private static final String TOKEN = "myqiqi";
-	private static final String APP_ID = "wxe6626fc25736c77e";
-	private static final String APP_SECRET = "c5ea13a94c08a1ed07fc4eaeb6ca913b";
+	
+	@Autowired(required=true)
+	private SessionRepository<?> sessionRepo;
 	
 	@PostConstruct
 	public void logSomething() {
@@ -29,6 +36,16 @@ public class Application {
 		logger.warn("------------------------------------------Active Log Level [Warn]------------------------------------------");
 		logger.error("------------------------------------------Active Log Level [Error]------------------------------------------");
 		logger.debug("------------------------------------------Active Log Level [Debug]------------------------------------------");
+		
+		Session session = sessionRepo.createSession();
+		session.setAttribute("test", "aaa");
+		logger.info("------------------------------------------Session is fired []------------------------------------------");
+		
+		String sId = session.getId();
+		Session sessions = sessionRepo.getSession(sId);
+		String val = sessions.getAttribute("test");
+		System.out.println("------------value from session is:" + val);
+		
 	}
 
 	public static void main(String[] args) throws Exception {

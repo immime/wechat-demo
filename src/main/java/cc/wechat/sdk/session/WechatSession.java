@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.naming.StringManager;
 
-public class StandardSession implements WxSession, InternalSession {
+public class WechatSession implements IWechatSession, InternalSession {
 
   /**
    * The string manager for this package.
@@ -18,7 +18,6 @@ public class StandardSession implements WxSession, InternalSession {
   protected static final StringManager sm =
       StringManager.getManager(Constants.Package);
 
-  // ------------------------------ WxSession
   protected Map<String, Object> attributes = new ConcurrentHashMap<String, Object>();
 
   @Override
@@ -141,14 +140,14 @@ public class StandardSession implements WxSession, InternalSession {
   protected transient AtomicInteger accessCount = null;
 
 
-  public StandardSession(InternalSessionManager manager) {
+  public WechatSession(InternalSessionManager manager) {
     this.manager = manager;
     this.accessCount = new AtomicInteger();
   }
 
 
   @Override
-  public WxSession getSession() {
+  public IWechatSession getSession() {
 
     if (facade == null){
       facade = new StandardSessionFacade(this);
@@ -314,9 +313,9 @@ public class StandardSession implements WxSession, InternalSession {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof StandardSession)) return false;
+    if (!(o instanceof WechatSession)) return false;
 
-    StandardSession session = (StandardSession) o;
+    WechatSession session = (WechatSession) o;
 
     if (creationTime != session.creationTime) return false;
     if (expiring != session.expiring) return false;

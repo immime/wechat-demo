@@ -1,15 +1,15 @@
-package cc.wechat.sdk.bean;
+package cc.wechat.sdk.bean.msg.in;
 
-import cc.wechat.sdk.bean.msg.in.BaseInMsg;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
+/**
+ * 微信服务器返回的token
+ * @author weny
+ * @datetime 2015年7月24日 下午12:09:41
+ */
 public class Token extends BaseInMsg{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7969371422871383262L;
+	
+	static final long serialVersionUID = -7969371422871383262L;
+	
 	private String access_token;
 	private String expires_in;
 

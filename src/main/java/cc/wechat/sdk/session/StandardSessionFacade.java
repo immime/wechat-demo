@@ -2,14 +2,14 @@ package cc.wechat.sdk.session;
 
 import java.util.Enumeration;
 
-public class StandardSessionFacade implements WxSession {
+public class StandardSessionFacade implements IWechatSession {
 
   /**
    * Wrapped session object.
    */
-  private WxSession session = null;
+  private IWechatSession session = null;
 
-  public StandardSessionFacade(StandardSession session) {
+  public StandardSessionFacade(WechatSession session) {
     this.session = session;
   }
 

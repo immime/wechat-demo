@@ -9,7 +9,7 @@ package cc.wechat.sdk.bean.msg.out;
 public class MediaOutMsg extends BaseOutMsg {
 
 	static final long serialVersionUID = -2312801991978773084L;
-	
+
 	/**
 	 * 媒体文件ID
 	 */
@@ -17,20 +17,20 @@ public class MediaOutMsg extends BaseOutMsg {
 	/**
 	 * 媒体类型
 	 */
-	private String mediaType;
+	private String type;
 	/**
 	 * 本地路径
 	 */
-	private String path;
+	private String localPath;
 
 	public MediaOutMsg() {
 	}
 
-	public MediaOutMsg(String media_id, String mediaType, String path) {
+	public MediaOutMsg(String media_id, String type, String localPath) {
 		super();
 		this.media_id = media_id;
-		this.mediaType = mediaType;
-		this.path = path;
+		this.type = type;
+		this.localPath = localPath;
 	}
 
 	public String getMedia_id() {
@@ -41,20 +41,20 @@ public class MediaOutMsg extends BaseOutMsg {
 		this.media_id = media_id;
 	}
 
-	public String getMediaType() {
-		return mediaType;
+	public String getType() {
+		return type;
 	}
 
-	public void setMediaType(String mediaType) {
-		this.mediaType = mediaType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public String getPath() {
-		return path;
+	public String getLocalPath() {
+		return localPath;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setLocalPath(String localPath) {
+		this.localPath = localPath;
 	}
 
 }

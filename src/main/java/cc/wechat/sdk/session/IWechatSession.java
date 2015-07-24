@@ -2,7 +2,7 @@ package cc.wechat.sdk.session;
 
 import java.util.Enumeration;
 
-public interface WxSession {
+public interface IWechatSession {
 
   public Object getAttribute(String name);
 

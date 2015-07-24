@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 基于内存的session manager
  */
-public class StandardSessionManager implements WxSessionManager, InternalSessionManager {
+public class StandardSessionManager implements IWechatSessionManager, InternalSessionManager {
 
   protected final Logger log = LoggerFactory.getLogger(StandardSessionManager.class);
 
@@ -25,12 +25,12 @@ public class StandardSessionManager implements WxSessionManager, InternalSession
   protected Map<String, InternalSession> sessions = new ConcurrentHashMap<String, InternalSession>();
 
   @Override
-  public WxSession getSession(String sessionId) {
+  public IWechatSession getSession(String sessionId) {
     return getSession(sessionId, true);
   }
 
   @Override
-  public WxSession getSession(String sessionId, boolean create) {
+  public IWechatSession getSession(String sessionId, boolean create) {
     if (sessionId == null) {
       throw new IllegalStateException
           (sm.getString("sessionManagerImpl.getSession.ise"));
@@ -187,7 +187,7 @@ public class StandardSessionManager implements WxSessionManager, InternalSession
    * Get new session class to be used in the doLoad() method.
    */
   protected InternalSession getNewSession() {
-    return new StandardSession(this);
+    return new WechatSession(this);
   }
 
 
