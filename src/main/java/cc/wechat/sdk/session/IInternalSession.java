@@ -1,6 +1,6 @@
 package cc.wechat.sdk.session;
 
-public interface InternalSession {
+public interface IInternalSession {
 
   /**
    * Return the <code>HttpSession</code> for which this object

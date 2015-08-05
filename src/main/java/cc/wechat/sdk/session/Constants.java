@@ -17,8 +17,6 @@
 
 package cc.wechat.sdk.session;
 
-import cc.wechat.Application;
-
 /**
  * Manifest constants for the <code>org.apache.catalina.session</code>
  * package.
@@ -28,10 +26,6 @@ import cc.wechat.Application;
 
 public class Constants {
 
-    public static final String Package = Application.class.getPackage().getName();
-    
-    public static void main(String[] args) {
-		System.out.println(Application.class.getPackage().getName());
-	}
+    public static final String Package = "me.chanjar.weixin.common.session";
 
 }

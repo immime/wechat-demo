@@ -1,6 +1,6 @@
 package cc.wechat.sdk.session;
 
-public interface InternalSessionManager {
+public interface IInternalSessionManager {
 
   /**
    * Return the active Session, associated with this Manager, with the
@@ -13,7 +13,7 @@ public interface InternalSessionManager {
    * @exception java.io.IOException if an input/output error occurs while
    *  processing this request
    */
-  InternalSession findSession(String id);
+  IInternalSession findSession(String id);
 
   /**
    * Construct and return a new session object, based on the default
@@ -28,14 +28,14 @@ public interface InternalSessionManager {
    * @exception IllegalStateException if a new session cannot be
    *  instantiated for any reason
    */
-  public InternalSession createSession(String sessionId);
+  public IInternalSession createSession(String sessionId);
 
   /**
    * Remove this Session from the active Sessions for this Manager.
    *
    * @param session Session to be removed
    */
-  public void remove(InternalSession session);
+  public void remove(IInternalSession session);
 
   /**
    * Remove this Session from the active Sessions for this Manager.
@@ -43,14 +43,14 @@ public interface InternalSessionManager {
    * @param session   Session to be removed
    * @param update    Should the expiration statistics be updated
    */
-  public void remove(InternalSession session, boolean update);
+  public void remove(IInternalSession session, boolean update);
 
   /**
    * Add this Session to the set of active Sessions for this Manager.
    *
    * @param session Session to be added
    */
-  void add(InternalSession session);
+  void add(IInternalSession session);
 
 
   /**
@@ -64,9 +64,9 @@ public interface InternalSessionManager {
    * The PersistentManager manager does not need to create session data
    * because it reads it from the Store.
    */
-  InternalSession createEmptySession();
+  IInternalSession createEmptySession();
 
-  InternalSession[] findSessions();
+  IInternalSession[] findSessions();
 
   /**
    * Implements the Manager interface, direct call to processExpires

@@ -9,8 +9,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.naming.StringManager;
+import org.springframework.stereotype.Component;
 
-public class WechatSession implements IWechatSession, InternalSession {
+@Component
+public class StandardSession implements IWechatSession, IInternalSession {
+	
+  public StandardSession() {
+  }
 
   /**
    * The string manager for this package.
@@ -18,6 +23,7 @@ public class WechatSession implements IWechatSession, InternalSession {
   protected static final StringManager sm =
       StringManager.getManager(Constants.Package);
 
+  // ------------------------------ WxSession
   protected Map<String, Object> attributes = new ConcurrentHashMap<String, Object>();
 
   @Override
@@ -104,7 +110,7 @@ public class WechatSession implements IWechatSession, InternalSession {
   /**
    * The Manager with which this Session is associated.
    */
-  protected transient InternalSessionManager manager = null;
+  protected transient IInternalSessionManager manager = null;
 
   /**
    * Type array.
@@ -140,7 +146,7 @@ public class WechatSession implements IWechatSession, InternalSession {
   protected transient AtomicInteger accessCount = null;
 
 
-  public WechatSession(InternalSessionManager manager) {
+  public StandardSession(IInternalSessionManager manager) {
     this.manager = manager;
     this.accessCount = new AtomicInteger();
   }
@@ -313,9 +319,9 @@ public class WechatSession implements IWechatSession, InternalSession {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof WechatSession)) return false;
+    if (!(o instanceof StandardSession)) return false;
 
-    WechatSession session = (WechatSession) o;
+    StandardSession session = (StandardSession) o;
 
     if (creationTime != session.creationTime) return false;
     if (expiring != session.expiring) return false;

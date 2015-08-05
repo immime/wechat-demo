@@ -2,19 +2,25 @@ package cc.wechat.sdk.session;
 
 import java.util.Enumeration;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class StandardSessionFacade implements IWechatSession {
 
   /**
    * Wrapped session object.
    */
   private IWechatSession session = null;
+  
+  public StandardSessionFacade() {
+  }
 
-  public StandardSessionFacade(WechatSession session) {
+  public StandardSessionFacade(StandardSession session) {
     this.session = session;
   }
 
-  public InternalSession getInternalSession() {
-    return (InternalSession) session;
+  public IInternalSession getInternalSession() {
+    return (IInternalSession) session;
   }
 
   @Override

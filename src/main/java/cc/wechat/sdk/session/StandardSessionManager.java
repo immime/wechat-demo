@@ -7,11 +7,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.naming.StringManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * 基于内存的session manager
  */
-public class StandardSessionManager implements IWechatSessionManager, InternalSessionManager {
+@Component
+public class StandardSessionManager implements IWechatSessionManager, IInternalSessionManager {
 
   protected final Logger log = LoggerFactory.getLogger(StandardSessionManager.class);
 
@@ -22,8 +24,12 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
    * The set of currently active Sessions for this Manager, keyed by
    * session identifier.
    */
-  protected Map<String, InternalSession> sessions = new ConcurrentHashMap<String, InternalSession>();
+  protected Map<String, IInternalSession> sessions = new ConcurrentHashMap<String, IInternalSession>();
 
+  
+  public StandardSessionManager() {
+  }
+  
   @Override
   public IWechatSession getSession(String sessionId) {
     return getSession(sessionId, true);
@@ -36,7 +42,7 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
           (sm.getString("sessionManagerImpl.getSession.ise"));
     }
 
-    InternalSession session = findSession(sessionId);
+    IInternalSession session = findSession(sessionId);
     if ((session != null) && !session.isValid()) {
       session = null;
     }
@@ -119,12 +125,12 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
   private final AtomicBoolean backgroundProcessStarted = new AtomicBoolean(false);
 
   @Override
-  public void remove(InternalSession session) {
+  public void remove(IInternalSession session) {
     remove(session, false);
   }
 
   @Override
-  public void remove(InternalSession session, boolean update) {
+  public void remove(IInternalSession session, boolean update) {
     if (session.getIdInternal() != null) {
       sessions.remove(session.getIdInternal());
     }
@@ -133,7 +139,7 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
 
 
   @Override
-  public InternalSession findSession(String id) {
+  public IInternalSession findSession(String id) {
 
     if (id == null)
       return (null);
@@ -142,7 +148,7 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
   }
 
   @Override
-  public InternalSession createSession(String sessionId) {
+  public IInternalSession createSession(String sessionId) {
     if (sessionId == null) {
       throw new IllegalStateException
           (sm.getString("sessionManagerImpl.createSession.ise"));
@@ -157,7 +163,7 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
     }
 
     // Recycle or create a Session instance
-    InternalSession session = createEmptySession();
+    IInternalSession session = createEmptySession();
 
     // Initialize the properties of the new session and return it
     session.setValid(true);
@@ -179,20 +185,20 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
 
 
   @Override
-  public InternalSession createEmptySession() {
+  public IInternalSession createEmptySession() {
     return (getNewSession());
   }
 
   /**
    * Get new session class to be used in the doLoad() method.
    */
-  protected InternalSession getNewSession() {
-    return new WechatSession(this);
+  protected IInternalSession getNewSession() {
+    return new StandardSession(this);
   }
 
 
   @Override
-  public void add(InternalSession session) {
+  public void add(IInternalSession session) {
 
     // 当第一次有session创建的时候，开启session清理线程
     if (!backgroundProcessStarted.getAndSet(true)) {
@@ -231,9 +237,9 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
    * If this Manager has no active Sessions, a zero-length array is returned.
    */
   @Override
-  public InternalSession[] findSessions() {
+  public IInternalSession[] findSessions() {
 
-    return sessions.values().toArray(new InternalSession[0]);
+    return sessions.values().toArray(new IInternalSession[0]);
 
   }
 
@@ -250,7 +256,7 @@ public class StandardSessionManager implements IWechatSessionManager, InternalSe
   public void processExpires() {
 
     long timeNow = System.currentTimeMillis();
-    InternalSession sessions[] = findSessions();
+    IInternalSession sessions[] = findSessions();
     int expireHere = 0 ;
 
     if(log.isDebugEnabled())
