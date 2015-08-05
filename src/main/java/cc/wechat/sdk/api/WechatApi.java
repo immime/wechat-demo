@@ -17,8 +17,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -60,6 +62,9 @@ import com.sun.corba.se.pept.transport.ContactInfo;
 public class WechatApi {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(WechatApi.class);
+	
+	@Autowired
+	private static StringRedisTemplate redis;
 	
 	/*delicious*/
 	private static final String APP_ID = "wx6b86e8d05df1bee3";
