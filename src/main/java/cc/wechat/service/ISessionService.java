@@ -1,4 +1,4 @@
-package cc.wechat.service.session;
+package cc.wechat.service;
 
 /**
  * Service服务

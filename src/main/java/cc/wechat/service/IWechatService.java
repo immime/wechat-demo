@@ -9,9 +9,10 @@ public interface IWechatService {
 	 * @param timestamp
 	 * @param nonce
 	 * @param signature
+	 * @param echostr
 	 * @return
 	 */
-	boolean checkSignature(String timestamp, String nonce, String signature);
+	boolean checkSignature(String timestamp, String nonce, String signature, String echostr);
 	
 
 }

@@ -1,4 +1,4 @@
-package cc.wechat.service.session.impl;
+package cc.wechat.service.impl;
 
 import javax.annotation.Resource;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import cc.wechat.config.WechatConsts;
 import cc.wechat.sdk.session.IWechatSession;
 import cc.wechat.sdk.session.IWechatSessionManager;
-import cc.wechat.service.session.ISessionService;
+import cc.wechat.service.ISessionService;
 
 @Service
 public class SessionService implements ISessionService {
