@@ -21,7 +21,7 @@ public class StandardSession implements IWechatSession, IInternalSession {
    * The string manager for this package.
    */
   protected static final StringManager sm =
-      StringManager.getManager(Constants.Package);
+      StringManager.getManager(SessionConstants.Package);
 
   // ------------------------------ WxSession
   protected Map<String, Object> attributes = new ConcurrentHashMap<String, Object>();

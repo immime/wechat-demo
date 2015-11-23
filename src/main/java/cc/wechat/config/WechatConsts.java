@@ -7,6 +7,13 @@ public class WechatConsts {
 	
 	public static final String FILE_TMP_PATH = "E:\\temp\\";
 	
+	/**
+	 * 微信服务的session id
+	 */
+	public static final String SESSION_ID = "wechat_session_id";
+	
+	
+	
 
 	// /////////////////////
 	// 微信推送过来的消息的类型，和发送给微信xml格式消息的消息类型

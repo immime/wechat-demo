@@ -24,8 +24,8 @@ package cc.wechat.sdk.session;
  * @author Craig R. McClanahan
  */
 
-public class Constants {
+public class SessionConstants {
 
-    public static final String Package = "me.chanjar.weixin.common.session";
+    public static final String Package = "cc.wechat.sdk.session";
 
 }

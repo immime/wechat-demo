@@ -18,7 +18,7 @@ public class StandardSessionManager implements IWechatSessionManager, IInternalS
   protected final Logger log = LoggerFactory.getLogger(StandardSessionManager.class);
 
   protected static final StringManager sm =
-      StringManager.getManager(Constants.Package);
+      StringManager.getManager(SessionConstants.Package);
 
   /**
    * The set of currently active Sessions for this Manager, keyed by
