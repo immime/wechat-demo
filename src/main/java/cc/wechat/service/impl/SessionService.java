@@ -5,9 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cc.wechat.config.WechatConsts;
-import cc.wechat.sdk.session.IWechatSession;
-import cc.wechat.sdk.session.IWechatSessionManager;
 import cc.wechat.service.ISessionService;
+import cc.wechat.session.IWechatSession;
+import cc.wechat.session.IWechatSessionManager;
 
 @Service
 public class SessionService implements ISessionService {
