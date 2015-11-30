@@ -26,3 +26,6 @@
 
 #Project log files
 /logs/
+
+#tomcat files
+catalina.base_IS_UNDEFINED/
