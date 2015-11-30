@@ -19,7 +19,7 @@ import cc.wechat.service.IWechatService;
 @RequestMapping("/")
 public class WechatController extends WeixinControllerSupport {
 	private static final Logger logger = LoggerFactory.getLogger(WechatController.class);
-	private static final String TOKEN = "DvILSt6R9";
+	private static final String TOKEN = "myqiqi";
 
 	@Autowired
 	private IWechatService service;
