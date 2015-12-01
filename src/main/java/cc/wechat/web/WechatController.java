@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseEvent;
+import cc.wechat.sdk.message.req.MenuEvent;
 import cc.wechat.sdk.message.req.TextReqMsg;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
-import cc.wechat.service.ISessionService;
 import cc.wechat.service.IWechatService;
+import cc.wechat.service.joke.IJokeService;
+import cc.wechat.service.joke.bean.Joke;
+import cc.wechat.service.session.ISessionService;
 
 @RestController
 @RequestMapping("/")
@@ -22,9 +25,11 @@ public class WechatController extends WeixinControllerSupport {
 	private static final String TOKEN = "myqiqi";
 
 	@Autowired
-	private IWechatService service;
+	private IWechatService wechatService;
 	@Autowired
 	private ISessionService sessionService;
+	@Autowired
+	private IJokeService jokeService;
 
 	@Override
 	protected String getToken() {
@@ -44,6 +49,21 @@ public class WechatController extends WeixinControllerSupport {
 				String.format(
 						"欢迎光临！\n%s",
 						"<a href='http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MzA3NDMyNzc5Mg==#wechat_webview_type=1&wechat_redirect'>查看历史消息</a>"));
+	}
+	
+	@Override
+	protected BaseMsg handleMenuClickEvent(MenuEvent event) {
+		// TODO Auto-generated method stub
+		String clickKey = event.getEventKey();
+		switch (clickKey) {
+		case "MENU_CLICK_JOKE":
+			Joke j = jokeService.getRandomJoke();
+			return new TextMsg("《" + j.getTitle() + "》" + "\n" + j.getText());
+		default:
+			break;
+		}
+		
+		return super.handleMenuClickEvent(event);
 	}
 
 	/**
