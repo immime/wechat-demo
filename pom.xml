@@ -7,11 +7,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<repository>
-		<id>repository.spring.milestone</id>
-		<name>Spring Milestone Repository</name>
-		<url>http://repo.spring.io/milestone</url>
-	</repository>
+	<repositories>
+		<repository>
+			<id>repository.spring.milestone</id>
+			<name>Spring Milestone Repository</name>
+			<url>http://repo.spring.io/milestone</url>
+		</repository>
+	</repositories>
 
 	<!-- Inherit defaults from Spring Boot -->
 	<parent>
