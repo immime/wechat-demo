@@ -1,6 +1,6 @@
 package cc.wechat.sdk.message.req;
 
-public final class ReqType {
+public final class ReqMsgType {
 
     public static final String TEXT        = "text";
     public static final String IMAGE       = "image";
@@ -11,7 +11,7 @@ public final class ReqType {
     public static final String SHORT_VIDEO = "shortvideo";
     public static final String EVENT       = "event";
 
-    private ReqType() {
+    private ReqMsgType() {
     }
 
 }

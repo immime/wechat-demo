@@ -22,17 +22,17 @@ import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.aes.AesException;
 import cc.wechat.sdk.message.aes.WXBizMsgCrypt;
-import cc.wechat.sdk.message.req.BaseEvent;
+import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.message.req.BaseReq;
 import cc.wechat.sdk.message.req.BaseReqMsg;
-import cc.wechat.sdk.message.req.EventType;
+import cc.wechat.sdk.message.req.ReqEventType;
 import cc.wechat.sdk.message.req.ImageReqMsg;
 import cc.wechat.sdk.message.req.LinkReqMsg;
 import cc.wechat.sdk.message.req.LocationEvent;
 import cc.wechat.sdk.message.req.LocationReqMsg;
 import cc.wechat.sdk.message.req.MenuEvent;
 import cc.wechat.sdk.message.req.QrCodeEvent;
-import cc.wechat.sdk.message.req.ReqType;
+import cc.wechat.sdk.message.req.ReqMsgType;
 import cc.wechat.sdk.message.req.ScanCodeEvent;
 import cc.wechat.sdk.message.req.SendMessageEvent;
 import cc.wechat.sdk.message.req.SendPicsInfoEvent;
@@ -144,7 +144,7 @@ public abstract class WeixinSupport {
 
         BaseMsg msg = null;
 
-        if (msgType.equals(ReqType.EVENT)) {
+        if (msgType.equals(ReqMsgType.EVENT)) {
             String eventType = (String) reqMap.get("Event");
             String ticket = (String) reqMap.get("Ticket");
             QrCodeEvent qrCodeEvent = null;
@@ -154,15 +154,15 @@ public abstract class WeixinSupport {
                 LOG.debug("ticket:{}", ticket);
                 qrCodeEvent = new QrCodeEvent(eventKey, ticket);
                 buildBasicEvent(reqMap, qrCodeEvent);
-                if (eventType.equals(EventType.SCAN)) {
+                if (eventType.equals(ReqEventType.SCAN)) {
                     msg = handleQrCodeEvent(qrCodeEvent);
                     if (isNull(msg)) {
                         msg = processEventHandle(qrCodeEvent);
                     }
                 }
             }
-            if (eventType.equals(EventType.SUBSCRIBE)) {
-                BaseEvent event = new BaseEvent();
+            if (eventType.equals(ReqEventType.SUBSCRIBE)) {
+                BaseReqEvent event = new BaseReqEvent();
                 if (qrCodeEvent != null) {
                     event = qrCodeEvent;
                 } else {
@@ -172,14 +172,14 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            } else if (eventType.equals(EventType.UNSUBSCRIBE)) {
-                BaseEvent event = new BaseEvent();
+            } else if (eventType.equals(ReqEventType.UNSUBSCRIBE)) {
+                BaseReqEvent event = new BaseReqEvent();
                 buildBasicEvent(reqMap, event);
                 msg = handleUnsubscribe(event);
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            } else if (eventType.equals(EventType.CLICK)) {
+            } else if (eventType.equals(ReqEventType.CLICK)) {
                 String eventKey = (String) reqMap.get("EventKey");
                 LOG.debug("eventKey:{}", eventKey);
                 MenuEvent event = new MenuEvent(eventKey);
@@ -188,7 +188,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            } else if (eventType.equals(EventType.VIEW)) {
+            } else if (eventType.equals(ReqEventType.VIEW)) {
                 String eventKey = (String) reqMap.get("EventKey");
                 LOG.debug("eventKey:{}", eventKey);
                 MenuEvent event = new MenuEvent(eventKey);
@@ -197,7 +197,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            } else if (eventType.equals(EventType.LOCATION)) {
+            } else if (eventType.equals(ReqEventType.LOCATION)) {
                 double latitude = Double.parseDouble((String) reqMap.get("Latitude"));
                 double longitude = Double.parseDouble((String) reqMap.get("Longitude"));
                 double precision = Double.parseDouble((String) reqMap.get("Precision"));
@@ -208,7 +208,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            } else if (EventType.SCANCODEPUSH.equals(eventType) || EventType.SCANCODEWAITMSG.equals(eventType)) {
+            } else if (ReqEventType.SCANCODEPUSH.equals(eventType) || ReqEventType.SCANCODEWAITMSG.equals(eventType)) {
                 String eventKey = (String) reqMap.get("EventKey");
                 Map<String, Object> scanCodeInfo = (Map<String, Object>)reqMap.get("ScanCodeInfo");
                 String scanType = (String) scanCodeInfo.get("ScanType");
@@ -219,7 +219,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            } else if (EventType.PICPHOTOORALBUM.equals(eventType) || EventType.PICSYSPHOTO.equals(eventType) || EventType.PICWEIXIN.equals(eventType)) {
+            } else if (ReqEventType.PICPHOTOORALBUM.equals(eventType) || ReqEventType.PICSYSPHOTO.equals(eventType) || ReqEventType.PICWEIXIN.equals(eventType)) {
                 String eventKey = (String) reqMap.get("EventKey");
                 Map<String, Object> sendPicsInfo = (Map<String, Object>)reqMap.get("SendPicsInfo");
                 int count = Integer.parseInt((String) sendPicsInfo.get("Count"));
@@ -230,7 +230,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            } else if (EventType.TEMPLATESENDJOBFINISH.equals(eventType)) {
+            } else if (ReqEventType.TEMPLATESENDJOBFINISH.equals(eventType)) {
                 String msgId = (String) reqMap.get("MsgID");
                 String status = (String) reqMap.get("Status");
                 TemplateMsgEvent event = new TemplateMsgEvent(msgId,status);
@@ -239,7 +239,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processEventHandle(event);
                 }
-            }else if(EventType.MASSSENDJOBFINISH.equals(eventType)){
+            }else if(ReqEventType.MASSSENDJOBFINISH.equals(eventType)){
                 String msgId=(String)reqMap.get("MsgID");
                 String status=(String)reqMap.get("Status");
                 Integer TotalCount=Integer.valueOf(String.valueOf(reqMap.get("TotalCount")));
@@ -254,7 +254,7 @@ public abstract class WeixinSupport {
                 }
             }
         } else {
-            if (msgType.equals(ReqType.TEXT)) {
+            if (msgType.equals(ReqMsgType.TEXT)) {
                 String content = (String) reqMap.get("Content");
                 LOG.debug("文本消息内容:{}", content);
                 TextReqMsg textReqMsg = new TextReqMsg(content);
@@ -263,7 +263,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processMessageHandle(textReqMsg);
                 }
-            } else if (msgType.equals(ReqType.IMAGE)) {
+            } else if (msgType.equals(ReqMsgType.IMAGE)) {
                 String picUrl = (String) reqMap.get("PicUrl");
                 String mediaId = (String) reqMap.get("MediaId");
                 ImageReqMsg imageReqMsg = new ImageReqMsg(picUrl, mediaId);
@@ -272,7 +272,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processMessageHandle(imageReqMsg);
                 }
-            } else if (msgType.equals(ReqType.VOICE)) {
+            } else if (msgType.equals(ReqMsgType.VOICE)) {
                 String format = (String) reqMap.get("Format");
                 String mediaId = (String) reqMap.get("MediaId");
                 String recognition = (String) reqMap.get("Recognition");
@@ -283,7 +283,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processMessageHandle(voiceReqMsg);
                 }
-            } else if (msgType.equals(ReqType.VIDEO)) {
+            } else if (msgType.equals(ReqMsgType.VIDEO)) {
                 String thumbMediaId = (String) reqMap.get("ThumbMediaId");
                 String mediaId = (String) reqMap.get("MediaId");
                 VideoReqMsg videoReqMsg = new VideoReqMsg(mediaId, thumbMediaId);
@@ -292,7 +292,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processMessageHandle(videoReqMsg);
                 }
-            } else if (msgType.equals(ReqType.SHORT_VIDEO)) {
+            } else if (msgType.equals(ReqMsgType.SHORT_VIDEO)) {
                 String thumbMediaId = (String) reqMap.get("ThumbMediaId");
                 String mediaId = (String) reqMap.get("MediaId");
                 VideoReqMsg videoReqMsg = new VideoReqMsg(mediaId, thumbMediaId);
@@ -301,7 +301,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processMessageHandle(videoReqMsg);
                 }
-            } else if (msgType.equals(ReqType.LOCATION)) {
+            } else if (msgType.equals(ReqMsgType.LOCATION)) {
                 double locationX = Double.parseDouble((String) reqMap.get("Location_X"));
                 double locationY = Double.parseDouble((String) reqMap.get("Location_Y"));
                 int scale = Integer.parseInt((String) reqMap.get("Scale"));
@@ -313,7 +313,7 @@ public abstract class WeixinSupport {
                 if (isNull(msg)) {
                     msg = processMessageHandle(locationReqMsg);
                 }
-            } else if (msgType.equals(ReqType.LINK)) {
+            } else if (msgType.equals(ReqMsgType.LINK)) {
                 String title = (String) reqMap.get("Title");
                 String description = (String) reqMap.get("Description");
                 String url = (String) reqMap.get("Url");
@@ -370,7 +370,7 @@ public abstract class WeixinSupport {
         return null;
     }
 
-    private BaseMsg processEventHandle(BaseEvent event) {
+    private BaseMsg processEventHandle(BaseReqEvent event) {
         if (isEmpty(eventHandles)) {
             synchronized (LOCK) {
                 eventHandles = this.initEventHandles();
@@ -542,7 +542,7 @@ public abstract class WeixinSupport {
      * @param event 添加关注事件对象
      * @return 响应消息对象
      */
-    protected BaseMsg handleSubscribe(BaseEvent event) {
+    protected BaseMsg handleSubscribe(BaseReqEvent event) {
         return new TextMsg("感谢您的关注!");
     }
 
@@ -560,7 +560,7 @@ public abstract class WeixinSupport {
      * @param event 取消关注事件对象
      * @return 响应消息对象
      */
-    protected BaseMsg handleUnsubscribe(BaseEvent event) {
+    protected BaseMsg handleUnsubscribe(BaseReqEvent event) {
         return null;
     }
 
@@ -568,7 +568,7 @@ public abstract class WeixinSupport {
         return null;
     }
 
-    protected BaseMsg handleDefaultEvent(BaseEvent event) {
+    protected BaseMsg handleDefaultEvent(BaseReqEvent event) {
         return null;
     }
 
@@ -577,7 +577,7 @@ public abstract class WeixinSupport {
         reqMsg.setMsgId((String) reqMap.get("MsgId"));
     }
 
-    private void buildBasicEvent(Map<String, Object> reqMap, BaseEvent event) {
+    private void buildBasicEvent(Map<String, Object> reqMap, BaseReqEvent event) {
         addBasicReqParams(reqMap, event);
         event.setEvent((String) reqMap.get("Event"));
     }

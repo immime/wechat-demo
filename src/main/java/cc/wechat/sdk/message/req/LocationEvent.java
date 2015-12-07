@@ -1,6 +1,6 @@
 package cc.wechat.sdk.message.req;
 
-public final class LocationEvent extends BaseEvent {
+public final class LocationEvent extends BaseReqEvent {
 
     private double latitude;
     private double longitude;

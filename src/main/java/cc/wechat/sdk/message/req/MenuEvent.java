@@ -1,6 +1,6 @@
 package cc.wechat.sdk.message.req;
 
-public final class MenuEvent extends BaseEvent {
+public final class MenuEvent extends BaseReqEvent {
 
     private String eventKey;
 

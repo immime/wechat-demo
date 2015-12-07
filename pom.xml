@@ -25,40 +25,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- version variable -->
-		<junit.version>4.12</junit.version>
-		<logback.version>1.1.2</logback.version>
-		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
-
-	<profiles>
-		<profile>
-			<!-- 本地环境 -->
-			<id>local</id>
-			<properties>
-				<db-url><![CDATA[jdbc:mysql://127.0.0.1:3306/weixin?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true]]></db-url>
-				<db-driverClass>com.mysql.jdbc.Driver</db-driverClass>
-				<db-username>root</db-username>
-				<db-password>admin</db-password>
-				<db-maxPoolSize>5</db-maxPoolSize>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 开发环境 -->
-			<id>dev</id>
-			<properties>
-				<db-url><![CDATA[jdbc:mysql://sqld.duapp.com:4050/tAxHTblXofbKFyiuwtgh?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true]]></db-url>
-				<db-driverClass>com.mysql.jdbc.Driver></db-driverClass>
-				<db-username>07SaCBnfF1sroX10wYrirlCZ</db-username>
-				<db-password>9D5WfPZAx8Np9s3OzeOVyjoFgIQuiDEm</db-password>
-				<db-maxPoolSize>5</db-maxPoolSize>
-			</properties>
-			<!-- 默认激活本环境 -->
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-	</profiles>
 
 	<build>
 		<resources>
@@ -103,6 +70,11 @@
 	</build>
 
 	<dependencies>
+		<!-- Add Web based Endpoints like health,beans etc. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 		<!-- hot swap support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -113,6 +85,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<!-- Add AOP support application -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		
 		<!-- Session Manager -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

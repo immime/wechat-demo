@@ -1,6 +1,6 @@
 package cc.wechat.sdk.message.req;
 
-public final class ScanCodeEvent extends BaseEvent {
+public final class ScanCodeEvent extends BaseReqEvent {
 
 	private String eventKey;
 	private String scanType;

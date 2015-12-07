@@ -3,7 +3,7 @@ package cc.wechat.sdk.message.req;
 /**
  * Created by jileilei on 15/8/10.
  */
-public class SendMessageEvent extends  BaseEvent{
+public class SendMessageEvent extends  BaseReqEvent{
     private String msgId;//群发的消息ID
     private String status;//群发消息状态
     private Integer totalCount;//发送总数

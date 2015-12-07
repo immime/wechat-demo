@@ -1,11 +1,11 @@
 package cc.wechat.sdk.message.req;
 
-public class BaseEvent extends BaseReq {
+public class BaseReqEvent extends BaseReq {
 
     private String event;
 
-    public BaseEvent() {
-        setMsgType(ReqType.EVENT);
+    public BaseReqEvent() {
+        setMsgType(ReqMsgType.EVENT);
     }
 
     public String getEvent() {

@@ -1,6 +1,6 @@
 package cc.wechat.sdk.message.req;
 
-public final class EventType {
+public final class ReqEventType {
 
     public static final String SUBSCRIBE       = "subscribe";
     public static final String UNSUBSCRIBE     = "unsubscribe";
@@ -17,7 +17,7 @@ public final class EventType {
     public static final String TEMPLATESENDJOBFINISH  = "TEMPLATESENDJOBFINISH";
     public static final String MASSSENDJOBFINISH="MASSSENDJOBFINISH";
 
-    private EventType() {
+    private ReqEventType() {
     }
 
 }

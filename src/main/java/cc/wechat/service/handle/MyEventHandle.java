@@ -2,12 +2,12 @@ package cc.wechat.service.handle;
 
 import cc.wechat.sdk.handle.EventHandle;
 import cc.wechat.sdk.message.BaseMsg;
-import cc.wechat.sdk.message.req.BaseEvent;
+import cc.wechat.sdk.message.req.BaseReqEvent;
 
 public class MyEventHandle implements EventHandle {
 
 	@Override
-	public BaseMsg handle(BaseEvent event) {
+	public BaseMsg handle(BaseReqEvent event) {
 		// TODO Auto-generated method stub
 		System.out.println("in handle...");
 		String type = event.getMsgType();
@@ -16,7 +16,7 @@ public class MyEventHandle implements EventHandle {
 	}
 
 	@Override
-	public boolean beforeHandle(BaseEvent event) {
+	public boolean beforeHandle(BaseReqEvent event) {
 		// TODO Auto-generated method stub
 		System.out.println("before handle...");
 		

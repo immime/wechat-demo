@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cc.wechat.sdk.exception.WeixinException;
-import cc.wechat.web.WechatController;
 
 /**
  * 微信公众平台交互操作基类，提供几乎所有微信公众平台交互方式

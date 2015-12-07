@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cc.wechat.aop.Contextual;
+import cc.wechat.constant.MenuConstant;
 import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
-import cc.wechat.sdk.message.req.BaseEvent;
+import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.message.req.MenuEvent;
 import cc.wechat.sdk.message.req.TextReqMsg;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
@@ -37,6 +39,7 @@ public class WechatController extends WeixinControllerSupport {
 	}
 	
 	// 重写父类方法，处理对应的微信消息
+	@Contextual
 	@Override
 	protected BaseMsg handleTextMsg(TextReqMsg msg) {
 		String content = msg.getContent();
@@ -51,14 +54,22 @@ public class WechatController extends WeixinControllerSupport {
 						"<a href='http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MzA3NDMyNzc5Mg==#wechat_webview_type=1&wechat_redirect'>查看历史消息</a>"));
 	}
 	
+	@Contextual
 	@Override
 	protected BaseMsg handleMenuClickEvent(MenuEvent event) {
 		// TODO Auto-generated method stub
 		String clickKey = event.getEventKey();
+		// 记录操作到session
+		
 		switch (clickKey) {
-		case "MENU_CLICK_JOKE":
+		case MenuConstant.MENU_CLICK_FUNC_JOKE:
 			Joke j = jokeService.getRandomJoke();
 			return new TextMsg("《" + j.getTitle() + "》" + "\n" + j.getText());
+		case MenuConstant.MENU_CLICK_FUNC_WEATHER:
+			StringBuilder weatherMenu = new StringBuilder();
+			weatherMenu.append("1.输入城市名称拼音或汉字\n");
+			weatherMenu.append("2.发送你的地理位置");
+			return new TextMsg(weatherMenu.toString());
 		default:
 			break;
 		}
@@ -70,7 +81,7 @@ public class WechatController extends WeixinControllerSupport {
 	 * 关注
 	 */
 	@Override
-	protected BaseMsg handleSubscribe(BaseEvent event) {
+	protected BaseMsg handleSubscribe(BaseReqEvent event) {
 		// TODO Auto-generated method stub
 		logger.debug("用户关注");
 		return new TextMsg(String.format("来自服务器回复用户消息:%s", "欢迎光临！"));
@@ -80,7 +91,7 @@ public class WechatController extends WeixinControllerSupport {
 	 * 取消关注
 	 */
 	@Override
-	protected BaseMsg handleUnsubscribe(BaseEvent event) {
+	protected BaseMsg handleUnsubscribe(BaseReqEvent event) {
 		// TODO Auto-generated method stub
 		logger.debug("用户取消关注");
 		return new TextMsg(String.format("来自服务器回复用户消息:%s", "再会！"));
@@ -88,12 +99,14 @@ public class WechatController extends WeixinControllerSupport {
 
 	/* Session test */
 
+	@Contextual
 	@RequestMapping(value = "/put/{key}/{value}")
 	public String testPut(@PathVariable("key") String key, @PathVariable("value") String value) {
 		sessionService.put(key, value);
 		return "success";
 	}
 
+	@Contextual
 	@RequestMapping(value = "/get/{key}")
 	public Object testGet(@PathVariable("key") String key) {
 		return sessionService.get(key);

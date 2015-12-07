@@ -3,7 +3,7 @@ package cc.wechat.sdk.message.req;
 /**
  * Created by Ben on 2015/6/24.
  */
-public class TemplateMsgEvent extends BaseEvent {
+public class TemplateMsgEvent extends BaseReqEvent {
     private String msgId;
     private String status;
 

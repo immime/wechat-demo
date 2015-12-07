@@ -12,7 +12,7 @@ public final class ImageReqMsg extends BaseReqMsg {
         super();
         this.picUrl = picUrl;
         this.mediaId = mediaId;
-        setMsgType(ReqType.IMAGE);
+        setMsgType(ReqMsgType.IMAGE);
     }
 
     public String getPicUrl() {

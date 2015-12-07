@@ -3,7 +3,7 @@ package cc.wechat.sdk.message.req;
 import java.util.List;
 import java.util.Map;
 
-public class SendPicsInfoEvent extends BaseEvent {
+public class SendPicsInfoEvent extends BaseReqEvent {
 	
 	private String eventKey;
 	private Integer count;

@@ -1,6 +1,6 @@
 package cc.wechat.sdk.message.req;
 
-public final class QrCodeEvent extends BaseEvent {
+public final class QrCodeEvent extends BaseReqEvent {
 
     private String eventKey;
     private String ticket;

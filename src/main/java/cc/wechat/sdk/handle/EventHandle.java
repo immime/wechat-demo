@@ -1,7 +1,7 @@
 package cc.wechat.sdk.handle;
 
 import cc.wechat.sdk.message.BaseMsg;
-import cc.wechat.sdk.message.req.BaseEvent;
+import cc.wechat.sdk.message.req.BaseReqEvent;
 
 /**
  * 微信事件处理器接口
@@ -9,7 +9,7 @@ import cc.wechat.sdk.message.req.BaseEvent;
  * @author peiyu
  * @since 1.1
  */
-public interface EventHandle<E extends BaseEvent> {
+public interface EventHandle<E extends BaseReqEvent> {
     /**
      * 处理微信事件
      *

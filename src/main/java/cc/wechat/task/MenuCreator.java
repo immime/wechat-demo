@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import cc.wechat.constant.MenuConstant;
 import cc.wechat.sdk.api.MenuAPI;
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.entity.Menu;
@@ -34,25 +35,27 @@ public class MenuCreator {
         //准备一级主菜单
         MenuButton main1 = new MenuButton();
         main1.setType(MenuType.CLICK);
-        main1.setKey("MENU_CLICK_FUNC");
+        main1.setKey(MenuConstant.MENU_CLICK_FUNC);
         main1.setName("功能");
+        
         //准备子菜单
         MenuButton sub1 = new MenuButton();
-        sub1.setKey("MENU_CLICK_AUTH");
-        sub1.setName("授权");
-        sub1.setType(MenuType.VIEW);
-        sub1.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxafb7b8f9457b5d50&redirect_uri=http://121.40.140.41/erhuluanzi/app/testGet&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect");
+        sub1.setKey(MenuConstant.MENU_CLICK_FUNC_WEATHER);
+        sub1.setName("查天气");
+        sub1.setType(MenuType.CLICK);
+        
         MenuButton sub2 = new MenuButton();
-        sub2.setKey("MENU_CLICK_JOKE");
+        sub2.setKey(MenuConstant.MENU_CLICK_FUNC_JOKE);
         sub2.setName("讲笑话");
         sub2.setType(MenuType.CLICK);
-
-
+        
         List<MenuButton> list = new ArrayList<MenuButton>();
         list.add(sub1);
         list.add(sub2);
         //将子菜单放入主菜单里
         main1.setSubButton(list);
+        
+        
 
         List<MenuButton> mainList = new ArrayList<MenuButton>();
         mainList.add(main1);

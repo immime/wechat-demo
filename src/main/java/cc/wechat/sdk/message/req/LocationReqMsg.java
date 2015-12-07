@@ -14,7 +14,7 @@ public final class LocationReqMsg extends BaseReqMsg {
         this.locationY = locationY;
         this.scale = scale;
         this.label = label;
-        setMsgType(ReqType.LOCATION);
+        setMsgType(ReqMsgType.LOCATION);
     }
 
     public double getLocationX() {
