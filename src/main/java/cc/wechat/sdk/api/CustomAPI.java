@@ -23,9 +23,9 @@ import cc.wechat.sdk.message.NewsMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.VideoMsg;
 import cc.wechat.sdk.message.VoiceMsg;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 客服相关API

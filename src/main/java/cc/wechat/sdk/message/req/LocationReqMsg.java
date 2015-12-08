@@ -1,5 +1,6 @@
 package cc.wechat.sdk.message.req;
 
+
 public final class LocationReqMsg extends BaseReqMsg {
 
     private double locationX;
@@ -14,7 +15,7 @@ public final class LocationReqMsg extends BaseReqMsg {
         this.locationY = locationY;
         this.scale = scale;
         this.label = label;
-        setMsgType(ReqMsgType.LOCATION);
+        setMsgType(ReqType.location.name());
     }
 
     public double getLocationX() {

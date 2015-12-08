@@ -1,4 +1,4 @@
-package cc.wechat.sdk.util;
+package cc.wechat.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;

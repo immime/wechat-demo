@@ -10,8 +10,8 @@ import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.enums.QrcodeType;
 import cc.wechat.sdk.api.response.BaseResponse;
 import cc.wechat.sdk.api.response.QrcodeResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 二维码相关API

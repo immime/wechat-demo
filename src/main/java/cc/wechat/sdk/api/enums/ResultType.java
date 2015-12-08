@@ -1,6 +1,6 @@
 package cc.wechat.sdk.api.enums;
 
-import cc.wechat.sdk.util.BeanUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 微信接口全局返回码枚举

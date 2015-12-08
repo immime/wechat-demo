@@ -11,9 +11,9 @@ import cc.wechat.sdk.company.api.config.QYAPIConfig;
 import cc.wechat.sdk.company.api.entity.QYMenu;
 import cc.wechat.sdk.company.api.enums.QYResultType;
 import cc.wechat.sdk.company.api.response.GetQYMenuResponse;
-import cc.wechat.sdk.util.BeanUtil;
-import cc.wechat.sdk.util.CollectionUtil;
 import cc.wechat.sdk.util.JSONUtil;
+import cc.wechat.utils.BeanUtil;
+import cc.wechat.utils.CollectionUtil;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;

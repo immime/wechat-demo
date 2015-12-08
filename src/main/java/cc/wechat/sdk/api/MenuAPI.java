@@ -10,9 +10,9 @@ import cc.wechat.sdk.api.entity.Menu;
 import cc.wechat.sdk.api.enums.ResultType;
 import cc.wechat.sdk.api.response.BaseResponse;
 import cc.wechat.sdk.api.response.GetMenuResponse;
-import cc.wechat.sdk.util.BeanUtil;
-import cc.wechat.sdk.util.CollectionUtil;
 import cc.wechat.sdk.util.JSONUtil;
+import cc.wechat.utils.BeanUtil;
+import cc.wechat.utils.CollectionUtil;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;

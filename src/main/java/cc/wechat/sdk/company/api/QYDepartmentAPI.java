@@ -6,8 +6,8 @@ import cc.wechat.sdk.company.api.entity.QYDepartment;
 import cc.wechat.sdk.company.api.enums.QYResultType;
 import cc.wechat.sdk.company.api.response.CreateDepartmentResponse;
 import cc.wechat.sdk.company.api.response.GetDepartmentListResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  *  

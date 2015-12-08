@@ -2,8 +2,8 @@ package cc.wechat.sdk.api.response;
 
 import cc.wechat.sdk.api.entity.BaseModel;
 import cc.wechat.sdk.api.enums.ResultType;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 微信API响应报文对象基类

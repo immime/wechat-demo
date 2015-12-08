@@ -1,5 +1,6 @@
 package cc.wechat.sdk.message.req;
 
+
 /**
  * @author peiyu
  */
@@ -12,7 +13,7 @@ public final class ImageReqMsg extends BaseReqMsg {
         super();
         this.picUrl = picUrl;
         this.mediaId = mediaId;
-        setMsgType(ReqMsgType.IMAGE);
+        setMsgType(ReqType.link.name());
     }
 
     public String getPicUrl() {

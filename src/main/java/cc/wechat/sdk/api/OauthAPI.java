@@ -11,9 +11,9 @@ import cc.wechat.sdk.api.enums.OauthScope;
 import cc.wechat.sdk.api.response.BaseResponse;
 import cc.wechat.sdk.api.response.GetUserInfoResponse;
 import cc.wechat.sdk.api.response.OauthGetTokenResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 网页授权API

@@ -8,11 +8,10 @@ public class WechatConsts {
 	public static final String FILE_TMP_PATH = "E:\\temp\\";
 	
 	/**
-	 * 微信服务的session id
+	 * 微信服务的session
 	 */
-	public static final String SESSION_ID = "wechat_session_id";
-	
-	
+	public static final String SESSION_ID = "SESSION_ID";
+	public static final String SESSION_KEY_LASTREQMSGINFO_PREFIX = "LASTREQMSGINFO_";
 	
 
 	// /////////////////////

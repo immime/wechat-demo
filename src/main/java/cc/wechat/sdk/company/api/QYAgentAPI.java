@@ -12,8 +12,8 @@ import cc.wechat.sdk.company.api.entity.QYAgent;
 import cc.wechat.sdk.company.api.enums.QYResultType;
 import cc.wechat.sdk.company.api.response.GetQYAgentInfoResponse;
 import cc.wechat.sdk.company.api.response.GetQYAgentListResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  *  

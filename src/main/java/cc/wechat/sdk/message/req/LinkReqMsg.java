@@ -1,5 +1,6 @@
 package cc.wechat.sdk.message.req;
 
+
 public final class LinkReqMsg extends BaseReqMsg {
 
     private String title;
@@ -11,7 +12,7 @@ public final class LinkReqMsg extends BaseReqMsg {
         this.title = title;
         this.description = description;
         this.url = url;
-        setMsgType(ReqMsgType.EVENT);
+        setMsgType(ReqType.event.name());
     }
 
     public String getTitle() {

@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import cc.wechat.sdk.api.enums.OauthScope;
 import cc.wechat.sdk.company.api.config.QYAPIConfig;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 企业号身份授权

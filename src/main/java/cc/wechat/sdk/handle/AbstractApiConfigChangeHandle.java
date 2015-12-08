@@ -3,7 +3,7 @@ package cc.wechat.sdk.handle;
 import java.util.Observable;
 
 import cc.wechat.sdk.api.config.ConfigChangeNotice;
-import cc.wechat.sdk.util.BeanUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 配置变化监听器抽象类

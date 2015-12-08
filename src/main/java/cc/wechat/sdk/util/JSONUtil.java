@@ -6,8 +6,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-import static cc.wechat.sdk.util.BeanUtil.requireNonNull;
 import static cc.wechat.sdk.util.StrUtil.isBlank;
+import static cc.wechat.utils.BeanUtil.requireNonNull;
 
 /**
  * json操作工具类，基于fastjson封装

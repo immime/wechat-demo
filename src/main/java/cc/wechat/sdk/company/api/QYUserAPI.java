@@ -11,9 +11,9 @@ import cc.wechat.sdk.company.api.response.GetOauthUserInfoResponse;
 import cc.wechat.sdk.company.api.response.GetQYUserInfo4DepartmentResponse;
 import cc.wechat.sdk.company.api.response.GetQYUserInfoResponse;
 import cc.wechat.sdk.company.api.response.GetQYUserInviteResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  *  

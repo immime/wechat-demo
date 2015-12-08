@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.enums.ResultType;
 import cc.wechat.sdk.api.response.GetSignatureResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JsApiUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 微信js-sdk相关API

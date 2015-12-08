@@ -1,6 +1,6 @@
 package cc.wechat.sdk.company.api.enums;
 
-import cc.wechat.sdk.util.BeanUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  *

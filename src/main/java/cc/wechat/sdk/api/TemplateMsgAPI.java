@@ -13,8 +13,8 @@ import cc.wechat.sdk.api.enums.ResultType;
 import cc.wechat.sdk.api.response.AddTemplateResponse;
 import cc.wechat.sdk.api.response.BaseResponse;
 import cc.wechat.sdk.api.response.SendTemplateResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 模版消息 api

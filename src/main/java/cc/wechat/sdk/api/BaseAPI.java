@@ -6,9 +6,9 @@ import java.util.List;
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.enums.ResultType;
 import cc.wechat.sdk.api.response.BaseResponse;
-import cc.wechat.sdk.util.BeanUtil;
-import cc.wechat.sdk.util.CollectionUtil;
 import cc.wechat.sdk.util.NetWorkCenter;
+import cc.wechat.utils.BeanUtil;
+import cc.wechat.utils.CollectionUtil;
 
 /**
  * API基类，提供一些通用方法

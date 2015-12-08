@@ -2,23 +2,25 @@ package cc.wechat.config;
 
 import java.util.List;
 
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import cc.wechat.interceptor.ContextualInterceptor;
+
 @Configuration
-@EnableAspectJAutoProxy
-@ComponentScan(
-        value = "cc.wechat",
-        includeFilters = @ComponentScan.Filter({Controller.class, RestController.class, Aspect.class}),
-        useDefaultFilters = false)
 public class AppConfig extends WebMvcConfigurerAdapter {
+	@Autowired
+    private ContextualInterceptor contextInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(contextInterceptor);
+    }
 	/**
 	 * Add JSON MessageConverter to send JSON objects to web clients.
 	 */

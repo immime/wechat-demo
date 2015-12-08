@@ -33,10 +33,10 @@ import cc.wechat.sdk.company.message.resp.QYBaseRespMsg;
 import cc.wechat.sdk.company.message.resp.QYTextRespMsg;
 import cc.wechat.sdk.message.aes.AesException;
 import cc.wechat.sdk.message.aes.WXBizMsgCrypt;
-import cc.wechat.sdk.util.BeanUtil;
-import cc.wechat.sdk.util.CollectionUtil;
 import cc.wechat.sdk.util.MessageUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
+import cc.wechat.utils.CollectionUtil;
 
 /**
  * ====================================================================

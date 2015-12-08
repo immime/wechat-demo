@@ -1,6 +1,7 @@
 package cc.wechat.sdk.handle;
 
 import cc.wechat.sdk.message.BaseMsg;
+import cc.wechat.sdk.message.req.BaseReq;
 import cc.wechat.sdk.message.req.BaseReqMsg;
 
 /**
@@ -9,7 +10,7 @@ import cc.wechat.sdk.message.req.BaseReqMsg;
  * @author peiyu
  * @since 1.1
  */
-public interface MessageHandle<M extends BaseReqMsg> {
+public interface MessageHandle<M extends BaseReq> {
     /**
      * 处理微信消息
      *

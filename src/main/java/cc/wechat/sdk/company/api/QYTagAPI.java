@@ -17,9 +17,9 @@ import cc.wechat.sdk.company.api.response.DelTagUsersResponse;
 import cc.wechat.sdk.company.api.response.GetTagInfoResponse;
 import cc.wechat.sdk.company.api.response.GetTagListResponse;
 import cc.wechat.sdk.exception.WeixinException;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  *  标签管理

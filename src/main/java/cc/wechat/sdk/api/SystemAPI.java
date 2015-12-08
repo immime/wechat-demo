@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.response.BaseResponse;
-import cc.wechat.sdk.util.CollectionUtil;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.CollectionUtil;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

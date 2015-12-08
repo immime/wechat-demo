@@ -16,9 +16,9 @@ import cc.wechat.sdk.api.response.GetGroupsResponse;
 import cc.wechat.sdk.api.response.GetUserInfoListResponse;
 import cc.wechat.sdk.api.response.GetUserInfoResponse;
 import cc.wechat.sdk.api.response.GetUsersResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.StrUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 用户管理相关API

@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import cc.wechat.sdk.company.api.config.QYConfigChangeNotice;
 import cc.wechat.sdk.handle.ApiConfigChangeHandle;
-import cc.wechat.sdk.util.BeanUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  *  

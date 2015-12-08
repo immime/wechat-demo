@@ -28,8 +28,8 @@ import cc.wechat.sdk.api.response.GetUserReadResponse;
 import cc.wechat.sdk.api.response.GetUserShareHourResponse;
 import cc.wechat.sdk.api.response.GetUserShareResponse;
 import cc.wechat.sdk.api.response.GetUserSummaryResponse;
-import cc.wechat.sdk.util.BeanUtil;
 import cc.wechat.sdk.util.JSONUtil;
+import cc.wechat.utils.BeanUtil;
 
 /**
  * 数据分析API

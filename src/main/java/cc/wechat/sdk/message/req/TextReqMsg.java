@@ -1,5 +1,6 @@
 package cc.wechat.sdk.message.req;
 
+
 public final class TextReqMsg extends BaseReqMsg {
 
     private String content;
@@ -7,7 +8,7 @@ public final class TextReqMsg extends BaseReqMsg {
     public TextReqMsg(String content) {
         super();
         this.content = content;
-        setMsgType(ReqMsgType.TEXT);
+        setMsgType(ReqType.text.name());
     }
 
     public String getContent() {

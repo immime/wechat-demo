@@ -1,5 +1,6 @@
 package cc.wechat.sdk.message.req;
 
+
 /**
  * @author peiyu
  */
@@ -14,7 +15,7 @@ public final class VoiceReqMsg extends BaseReqMsg {
         this.mediaId = mediaId;
         this.format = format;
         this.recognition = recognition;
-        setMsgType(ReqMsgType.VOICE);
+        setMsgType(ReqType.voice.name());
     }
 
     public String getMediaId() {

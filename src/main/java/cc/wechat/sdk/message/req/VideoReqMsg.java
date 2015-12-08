@@ -1,5 +1,6 @@
 package cc.wechat.sdk.message.req;
 
+
 public final class VideoReqMsg extends BaseReqMsg {
 
     private String mediaId;
@@ -9,7 +10,7 @@ public final class VideoReqMsg extends BaseReqMsg {
         super();
         this.mediaId = mediaId;
         this.thumbMediaId = thumbMediaId;
-        setMsgType(ReqMsgType.VIDEO);
+        setMsgType(ReqType.video.name());
     }
 
     public String getMediaId() {
