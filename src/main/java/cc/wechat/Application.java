@@ -14,7 +14,7 @@ import cc.wechat.config.AppConfig;
 
 @SpringBootApplication
 @EnableScheduling
-@Import(AppConfig.class)
+//@Import(AppConfig.class)
 public class Application {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);

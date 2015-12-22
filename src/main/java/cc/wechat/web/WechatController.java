@@ -17,6 +17,7 @@ import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
 import cc.wechat.service.context.IContextService;
+import cc.wechat.service.handle.MenuEventHandle;
 import cc.wechat.service.handle.MyMessageHandle;
 import cc.wechat.service.joke.IJokeService;
 import cc.wechat.service.session.ISessionService;
@@ -28,6 +29,8 @@ public class WechatController extends WeixinControllerSupport {
 	private static final String TOKEN = "myqiqi";
 
 	@Autowired
+	private IJokeService jokeService;
+	@Autowired
 	private ISessionService sessionService;
 
 	@Override
@@ -38,6 +41,8 @@ public class WechatController extends WeixinControllerSupport {
 	@Override
 	protected List<MessageHandle> initMessageHandles() {
 		// TODO Auto-generated method stub
+		System.err.println("autowire SUCCESS:" + (jokeService != null));
+		
 		List<MessageHandle> handles = new ArrayList<MessageHandle>();
 		MyMessageHandle handle = new MyMessageHandle();
 		handles.add(handle);
@@ -47,7 +52,10 @@ public class WechatController extends WeixinControllerSupport {
 	@Override
 	protected List<EventHandle> initEventHandles() {
 		// TODO Auto-generated method stub
-		return super.initEventHandles();
+		List<EventHandle> handles = new ArrayList<EventHandle>();
+		MenuEventHandle handle = new MenuEventHandle();
+		handles.add(handle);
+		return handles;
 	}
 
 	/**
@@ -67,7 +75,7 @@ public class WechatController extends WeixinControllerSupport {
 	protected BaseMsg handleUnsubscribe(BaseReqEvent event) {
 		// TODO Auto-generated method stub
 		logger.debug("用户取消关注");
-		return new TextMsg(String.format("来自服务器回复用户消息:%s", "再会！"));
+		return new TextMsg(String.format("来自服务器回复用户消息:%s", "又见面了！"));
 	}
 
 	/* Session test */

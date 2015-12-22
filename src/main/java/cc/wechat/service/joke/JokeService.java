@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import cc.wechat.service.joke.bean.Joke;
 
 @Service
+@Qualifier("jokeService")
 public class JokeService implements IJokeService {
 
 	@Override
