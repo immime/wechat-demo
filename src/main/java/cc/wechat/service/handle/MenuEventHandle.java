@@ -1,9 +1,7 @@
 package cc.wechat.service.handle;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import cc.wechat.constant.MenuConstant;
 import cc.wechat.sdk.handle.EventHandle;
@@ -12,24 +10,23 @@ import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.message.req.MenuEvent;
 import cc.wechat.service.context.IContextService;
-import cc.wechat.service.joke.JokeService;
+import cc.wechat.service.joke.IJokeService;
 import cc.wechat.service.joke.bean.Joke;
 import cc.wechat.service.session.ISessionService;
+import cc.wechat.service.weather.IWeatherService;
+import cc.wechat.service.weather.bean.CityParam;
 
 @Component
 public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 
 	@Autowired
-	@Qualifier("jokeService")
-	private JokeService jokeService;
+	public ISessionService sessionService;
 	@Autowired
-	private ISessionService sessionService;
+	public	IContextService contextService;
 	@Autowired
-	private	IContextService contextService;
-	
-	public MenuEventHandle() {
-		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-	}
+	private IJokeService jokeService;
+	@Autowired
+	private IWeatherService weatherService;
 	
 	@Override
 	public BaseMsg handle(BaseReqEvent event) {
@@ -43,12 +40,14 @@ public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 				
 				Joke j = jokeService.getRandomJoke();
 				TextMsg msg = new TextMsg();
-				msg.add(j.getTitle()).add("\n").add(j.getText());
+				msg.add("《").add(j.getTitle()).add("》").add("\n").add(j.getText());
 				return msg;
 			} 
 			if (MenuConstant.MENU_CLICK_FUNC_WEATHER.equals(key)) {
 				TextMsg msg = new TextMsg();
-				msg.add("xxx");
+				CityParam cityInfo = new CityParam();
+				cityInfo.setArea("北京");;
+				msg.add(weatherService.queryWeatherByCityInfo(cityInfo).toString());
 				return msg;
 			}
 		}

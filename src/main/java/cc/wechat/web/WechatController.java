@@ -16,10 +16,6 @@ import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
-import cc.wechat.service.context.IContextService;
-import cc.wechat.service.handle.MenuEventHandle;
-import cc.wechat.service.handle.MyMessageHandle;
-import cc.wechat.service.joke.IJokeService;
 import cc.wechat.service.session.ISessionService;
 
 @RestController
@@ -29,32 +25,34 @@ public class WechatController extends WeixinControllerSupport {
 	private static final String TOKEN = "myqiqi";
 
 	@Autowired
-	private IJokeService jokeService;
-	@Autowired
 	private ISessionService sessionService;
+	@Autowired
+	private EventHandle<BaseReqEvent> menuEventHandle;
+	private MessageHandle<BaseReqEvent> defaultMessageHandle;
+	private MessageHandle<BaseReqEvent> robotMessageHandle;
 
 	@Override
 	protected String getToken() {
 		return TOKEN;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected List<MessageHandle> initMessageHandles() {
 		// TODO Auto-generated method stub
-		System.err.println("autowire SUCCESS:" + (jokeService != null));
-		
+		System.err.println("autowire SUCCESS:" + (menuEventHandle != null));
 		List<MessageHandle> handles = new ArrayList<MessageHandle>();
-		MyMessageHandle handle = new MyMessageHandle();
-		handles.add(handle);
+		handles.add(defaultMessageHandle);
+		handles.add(robotMessageHandle);
 		return handles;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected List<EventHandle> initEventHandles() {
 		// TODO Auto-generated method stub
 		List<EventHandle> handles = new ArrayList<EventHandle>();
-		MenuEventHandle handle = new MenuEventHandle();
-		handles.add(handle);
+		handles.add(menuEventHandle);
 		return handles;
 	}
 

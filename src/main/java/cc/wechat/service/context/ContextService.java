@@ -3,8 +3,8 @@ package cc.wechat.service.context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cc.wechat.config.WechatConsts;
 import cc.wechat.constant.MenuConstant;
+import cc.wechat.constant.WechatConsts;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.service.context.bean.LastReqInfo;
 import cc.wechat.service.joke.IJokeService;

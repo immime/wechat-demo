@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import cc.wechat.config.WechatConsts;
+import cc.wechat.constant.WechatConsts;
 import cc.wechat.sdk.message.req.BaseReq;
 import cc.wechat.service.context.IContextService;
 import cc.wechat.service.context.bean.LastReqInfo;
