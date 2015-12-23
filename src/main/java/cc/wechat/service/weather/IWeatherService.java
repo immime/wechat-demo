@@ -1,6 +1,8 @@
 package cc.wechat.service.weather;
 
 import cc.wechat.openapi.exception.ApiStoreException;
+import cc.wechat.sdk.api.response.BaseResponse;
+import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.service.weather.bean.CityParam;
 import cc.wechat.service.weather.bean.resp.Weather;
 
@@ -8,15 +10,20 @@ public interface IWeatherService {
 	
 	/**
 	 * 根据地名查询对应的地名id
-	 * @param zhName
+	 * @param zhName 城市名称
 	 * @return
 	 */
-	String queryCreaidByZhName (String zhName) throws ApiStoreException;
+	String queryCreaid (String zhName) throws ApiStoreException;
 	
 	/**
 	 * 根据城市信息获取天气
-	 * @param cityPinyin
+	 * @param cityInfo
 	 * @return
 	 */
-	Weather queryWeatherByCityInfo(CityParam cityInfo) throws ApiStoreException;
+	Weather queryWeather(CityParam cityInfo) throws ApiStoreException;
+	
+	TextMsg queryWeatherTextMsg(CityParam cityInfo) throws ApiStoreException;
+	
+	BaseResponse queryWeatherBaseResponse(CityParam cityInfo) throws ApiStoreException;
+
 }

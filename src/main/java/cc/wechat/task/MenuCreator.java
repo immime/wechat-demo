@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import cc.wechat.config.ApiConfigCenter;
 import cc.wechat.constant.MenuConstant;
 import cc.wechat.sdk.api.MenuAPI;
 import cc.wechat.sdk.api.config.ApiConfig;
@@ -27,9 +28,8 @@ public class MenuCreator {
 	 */
 	@Scheduled(fixedRate = 1000 * 60 * 115)
 	private static void refresh() throws WeixinException {
-		String appid = "wxe6626fc25736c77e";
-        String secret = "c5ea13a94c08a1ed07fc4eaeb6ca913b";
-        ApiConfig config = new ApiConfig(appid, secret);
+		
+        ApiConfig config = ApiConfigCenter.getCongig();
         
         Menu request = new Menu();
         //准备一级主菜单

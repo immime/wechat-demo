@@ -1,4 +1,4 @@
-package cc.wechat.service.handle;
+package cc.wechat.handle;
 
 import cc.wechat.sdk.handle.MessageHandle;
 import cc.wechat.sdk.message.BaseMsg;

@@ -5,17 +5,15 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
-//@SpringBootApplication
+import cc.wechat.config.AppConfig;
+
+@SpringBootApplication
 @EnableScheduling
-//@Import(AppConfig.class)
+@Import(AppConfig.class)
 public class Application {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);

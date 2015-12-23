@@ -1,6 +1,6 @@
 package cc.wechat.config;
 
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 //@EnableRedisHttpSession
 public class RedisSessionConfig {

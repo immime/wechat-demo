@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cc.wechat.sdk.api.config.ApiConfig;
+import cc.wechat.sdk.api.entity.Article;
 import cc.wechat.sdk.api.enums.MaterialType;
 import cc.wechat.sdk.api.enums.ResultType;
 import cc.wechat.sdk.api.response.BaseResponse;
@@ -31,7 +32,6 @@ import cc.wechat.sdk.api.response.DownloadMaterialResponse;
 import cc.wechat.sdk.api.response.GetMaterialListResponse;
 import cc.wechat.sdk.api.response.GetMaterialTotalCountResponse;
 import cc.wechat.sdk.api.response.UploadMaterialResponse;
-import cc.wechat.sdk.message.Article;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.NetWorkCenter;
 import cc.wechat.sdk.util.StrUtil;
