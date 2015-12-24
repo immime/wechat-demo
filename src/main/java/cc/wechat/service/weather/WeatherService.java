@@ -7,7 +7,7 @@ import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.service.weather.bean.CityParam;
 import cc.wechat.service.weather.bean.resp.Weather;
 
-public interface IWeatherService {
+public interface WeatherService {
 	
 	/**
 	 * 根据地名查询对应的地名id

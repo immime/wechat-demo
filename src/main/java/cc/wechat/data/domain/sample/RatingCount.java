@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.service;
+package cc.wechat.data.domain.sample;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.io.Serializable;
 
-import cc.wechat.data.domain.City;
-import cc.wechat.data.domain.Hotel;
-import cc.wechat.data.domain.Review;
-import cc.wechat.data.domain.ReviewDetails;
+public class RatingCount implements Serializable {
 
-public interface HotelService {
+	private static final long serialVersionUID = 1L;
 
-	Hotel getHotel(City city, String name);
+	private final Rating rating;
 
-	Page<Review> getReviews(Hotel hotel, Pageable pageable);
+	private final long count;
 
-	Review getReview(Hotel hotel, int index);
+	public RatingCount(Rating rating, long count) {
+		this.rating = rating;
+		this.count = count;
+	}
 
-	Review addReview(Hotel hotel, ReviewDetails details);
+	public Rating getRating() {
+		return this.rating;
+	}
 
-	ReviewsSummary getReviewSummary(Hotel hotel);
-
+	public long getCount() {
+		return this.count;
+	}
 }

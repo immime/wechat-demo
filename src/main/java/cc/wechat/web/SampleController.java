@@ -22,19 +22,30 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cc.wechat.data.service.CityService;
+import cc.wechat.data.service.sample.CityService;
+import cc.wechat.service.joke.JokeService;
 
 @Controller
 public class SampleController {
 
 	@Autowired
 	private CityService cityService;
+	@Autowired
+	private JokeService jokeService;
 
 	@RequestMapping("/jpa")
 	@ResponseBody
 	@Transactional(readOnly = true)
 	public String helloWorld() {
 		return this.cityService.getCity("Bath", "UK").getName();
+	}
+	
+	@RequestMapping("/joke")
+	@ResponseBody
+	@Transactional(readOnly = true)
+	public String saveJokes() {
+		this.jokeService.batchPersist();
+		return "success";
 	}
 
 }

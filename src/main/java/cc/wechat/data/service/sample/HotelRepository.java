@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.service;
+package cc.wechat.data.service.sample;
 
 import java.util.List;
 
@@ -23,20 +23,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
-import cc.wechat.data.domain.City;
-import cc.wechat.data.domain.Hotel;
-import cc.wechat.data.domain.HotelSummary;
-import cc.wechat.data.domain.RatingCount;
+import cc.wechat.data.domain.sample.City;
+import cc.wechat.data.domain.sample.Hotel;
+import cc.wechat.data.domain.sample.HotelSummary;
+import cc.wechat.data.domain.sample.RatingCount;
 
 interface HotelRepository extends Repository<Hotel, Long> {
 
 	Hotel findByCityAndName(City city, String name);
 
-	@Query("select new cc.wechat.data.domain.HotelSummary(h.city, h.name, avg(r.rating)) "
+	@Query("select new cc.wechat.data.domain.sample.HotelSummary(h.city, h.name, avg(r.rating)) "
 			+ "from Hotel h left outer join h.reviews r where h.city = ?1 group by h")
 	Page<HotelSummary> findByCity(City city, Pageable pageable);
 
-	@Query("select new cc.wechat.data.domain.RatingCount(r.rating, count(r)) "
+	@Query("select new cc.wechat.data.domain.sample.RatingCount(r.rating, count(r)) "
 			+ "from Review r where r.hotel = ?1 group by r.rating order by r.rating DESC")
 	List<RatingCount> findRatingCounts(Hotel hotel);
 }

@@ -1,14 +1,15 @@
-package cc.wechat.service.joke.impl;
+package cc.wechat.service.joke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
@@ -17,23 +18,26 @@ import com.alibaba.fastjson.JSONObject;
 
 import cc.wechat.config.ApiConfigCenter;
 import cc.wechat.constant.WechatConsts;
+import cc.wechat.data.domain.Joke;
+import cc.wechat.data.repository.JokeRepository;
+import cc.wechat.openapi.ApiStoreClient;
 import cc.wechat.openapi.exception.ApiStoreException;
 import cc.wechat.sdk.api.MaterialAPI;
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.entity.Article;
 import cc.wechat.sdk.api.enums.MaterialType;
-import cc.wechat.sdk.api.enums.MediaType;
 import cc.wechat.sdk.api.response.DownloadMaterialResponse;
 import cc.wechat.sdk.api.response.UploadMaterialResponse;
 import cc.wechat.sdk.message.ArticleMsg;
 import cc.wechat.sdk.message.NewsMsg;
 import cc.wechat.sdk.message.req.BaseReq;
-import cc.wechat.service.joke.IJokeService;
-import cc.wechat.service.joke.bean.Joke;
-import cc.wechat.service.weather.bean.CityParam;
 
-@Service
-public class JokeService implements IJokeService {
+@Service("jokeService")
+@Transactional
+public class JokeServiceImpl implements JokeService {
+	
+	@Autowired
+	private JokeRepository jokeRepository;
 
 	//TODO 请求一次api返回二十条，应该缓存起来，用户重复点击时优先使用缓存。这样少消耗api请求次数
 	
@@ -97,6 +101,17 @@ public class JokeService implements IJokeService {
 		msg.setToUserName(req.getFromUserName());
 		
 		return msg;
+	}
+
+	@Override
+	public void batchPersist() {
+		// TODO Auto-generated method stub
+		JSONObject bodyJsonObj =  ApiStoreClient.post("/showapi_joke/joke_text?page=1", null);
+		
+		JSONArray result = bodyJsonObj.getJSONArray("contentlist"); 
+		List<Joke> jokes= JSON.parseArray(result.toJSONString(),Joke.class);
+		
+		jokeRepository.save(jokes);
 	}
 
 	

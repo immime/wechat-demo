@@ -14,21 +14,31 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.service;
+package cc.wechat.data.service.sample;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.Repository;
+import java.io.Serializable;
 
-import cc.wechat.data.domain.Hotel;
-import cc.wechat.data.domain.Review;
+import org.springframework.util.Assert;
 
-interface ReviewRepository extends Repository<Review, Long> {
+public class CitySearchCriteria implements Serializable {
 
-	Page<Review> findByHotel(Hotel hotel, Pageable pageable);
+	private static final long serialVersionUID = 1L;
 
-	Review findByHotelAndIndex(Hotel hotel, int index);
+	private String name;
 
-	Review save(Review review);
+	public CitySearchCriteria() {
+	}
 
+	public CitySearchCriteria(String name) {
+		Assert.notNull(name, "Name must not be null");
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

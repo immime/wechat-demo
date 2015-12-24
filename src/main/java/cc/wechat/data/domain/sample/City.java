@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.domain;
+package cc.wechat.data.domain.sample;
 
 import java.io.Serializable;
 

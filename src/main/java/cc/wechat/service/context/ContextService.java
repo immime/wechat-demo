@@ -5,19 +5,18 @@ import org.springframework.stereotype.Service;
 
 import cc.wechat.constant.MenuConstant;
 import cc.wechat.constant.WechatConsts;
-import cc.wechat.sdk.message.TextMsg;
+import cc.wechat.data.domain.Joke;
 import cc.wechat.service.context.bean.LastReqInfo;
-import cc.wechat.service.joke.IJokeService;
-import cc.wechat.service.joke.bean.Joke;
-import cc.wechat.service.session.ISessionService;
+import cc.wechat.service.joke.JokeService;
+import cc.wechat.service.session.SessionService;
 
 @Service
 public class ContextService implements IContextService {
 
 	@Autowired
-	private ISessionService sessionService;
+	private SessionService sessionService;
 	@Autowired
-	private IJokeService jokeService;
+	private JokeService jokeService;
 
 	@Override
 	public LastReqInfo getLastReqMsg(String openId) {

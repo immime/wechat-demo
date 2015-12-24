@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.service;
+package cc.wechat.data.service.sample;
 
-import cc.wechat.data.domain.Rating;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.Repository;
 
-public interface ReviewsSummary {
+import cc.wechat.data.domain.sample.City;
 
-	long getNumberOfReviewsWithRating(Rating rating);
+interface CityRepository extends Repository<City, Long> {
+
+	Page<City> findAll(Pageable pageable);
+
+	Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name,
+			String country, Pageable pageable);
+
+	City findByNameAndCountryAllIgnoringCase(String name, String country);
 
 }

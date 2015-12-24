@@ -14,20 +14,26 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.service;
+package cc.wechat.data.service.sample;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import cc.wechat.data.domain.City;
-import cc.wechat.data.domain.HotelSummary;
+import cc.wechat.data.domain.sample.City;
+import cc.wechat.data.domain.sample.Hotel;
+import cc.wechat.data.domain.sample.Review;
+import cc.wechat.data.domain.sample.ReviewDetails;
 
-public interface CityService {
+public interface HotelService {
 
-	Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
+	Hotel getHotel(City city, String name);
 
-	City getCity(String name, String country);
+	Page<Review> getReviews(Hotel hotel, Pageable pageable);
 
-	Page<HotelSummary> getHotels(City city, Pageable pageable);
+	Review getReview(Hotel hotel, int index);
+
+	Review addReview(Hotel hotel, ReviewDetails details);
+
+	ReviewsSummary getReviewSummary(Hotel hotel);
 
 }

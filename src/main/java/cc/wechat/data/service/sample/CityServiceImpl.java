@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.service;
+package cc.wechat.data.service.sample;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,8 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import cc.wechat.data.domain.City;
-import cc.wechat.data.domain.HotelSummary;
+import cc.wechat.data.domain.sample.City;
+import cc.wechat.data.domain.sample.HotelSummary;
 
 @Component("cityService")
 @Transactional

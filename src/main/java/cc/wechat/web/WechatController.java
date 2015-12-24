@@ -16,7 +16,7 @@ import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
-import cc.wechat.service.session.ISessionService;
+import cc.wechat.service.session.SessionService;
 
 @RestController
 @RequestMapping("/")
@@ -25,7 +25,7 @@ public class WechatController extends WeixinControllerSupport {
 	private static final String TOKEN = "myqiqi";
 
 	@Autowired
-	private ISessionService sessionService;
+	private SessionService sessionService;
 	@Autowired
 	private EventHandle<BaseReqEvent> menuEventHandle;
 	private MessageHandle<BaseReqEvent> defaultMessageHandle;

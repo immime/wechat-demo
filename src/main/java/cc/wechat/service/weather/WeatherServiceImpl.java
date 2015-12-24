@@ -1,4 +1,4 @@
-package cc.wechat.service.weather.impl;
+package cc.wechat.service.weather;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,7 +27,6 @@ import cc.wechat.sdk.api.response.UploadMaterialResponse;
 import cc.wechat.sdk.message.ArticleMsg;
 import cc.wechat.sdk.message.NewsMsg;
 import cc.wechat.sdk.message.TextMsg;
-import cc.wechat.service.weather.IWeatherService;
 import cc.wechat.service.weather.bean.CityInfo;
 import cc.wechat.service.weather.bean.CityParam;
 import cc.wechat.service.weather.bean.resp.CityResult;
@@ -35,8 +34,8 @@ import cc.wechat.service.weather.bean.resp.Now;
 import cc.wechat.service.weather.bean.resp.Weather;
 
 @Service
-public class WeatherService implements IWeatherService {
-	private static final Logger logger = LoggerFactory.getLogger(WeatherService.class);
+public class WeatherServiceImpl implements WeatherService {
+	private static final Logger logger = LoggerFactory.getLogger(WeatherServiceImpl.class);
 
 	@Override
 	public String queryCreaid(String zhName) {

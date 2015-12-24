@@ -14,28 +14,12 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.domain;
+package cc.wechat.data.service.sample;
 
-import java.io.Serializable;
+import cc.wechat.data.domain.sample.Rating;
 
-public class RatingCount implements Serializable {
+public interface ReviewsSummary {
 
-	private static final long serialVersionUID = 1L;
+	long getNumberOfReviewsWithRating(Rating rating);
 
-	private final Rating rating;
-
-	private final long count;
-
-	public RatingCount(Rating rating, long count) {
-		this.rating = rating;
-		this.count = count;
-	}
-
-	public Rating getRating() {
-		return this.rating;
-	}
-
-	public long getCount() {
-		return this.count;
-	}
 }

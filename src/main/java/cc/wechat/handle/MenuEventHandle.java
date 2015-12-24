@@ -11,10 +11,10 @@ import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.message.req.MenuEvent;
 import cc.wechat.service.context.IContextService;
-import cc.wechat.service.joke.IJokeService;
+import cc.wechat.service.joke.JokeService;
 import cc.wechat.service.joke.bean.Joke;
-import cc.wechat.service.session.ISessionService;
-import cc.wechat.service.weather.IWeatherService;
+import cc.wechat.service.session.SessionService;
+import cc.wechat.service.weather.WeatherService;
 import cc.wechat.service.weather.bean.CityParam;
 import cc.wechat.service.weather.bean.resp.Now;
 import cc.wechat.service.weather.bean.resp.Weather;
@@ -23,13 +23,13 @@ import cc.wechat.service.weather.bean.resp.Weather;
 public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 
 	@Autowired
-	public ISessionService sessionService;
+	public SessionService sessionService;
 	@Autowired
 	public	IContextService contextService;
 	@Autowired
-	private IJokeService jokeService;
+	private JokeService jokeService;
 	@Autowired
-	private IWeatherService weatherService;
+	private WeatherService weatherService;
 	
 	@Override
 	public BaseMsg handle(BaseReqEvent event) {

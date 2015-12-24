@@ -13,7 +13,7 @@ import cc.wechat.constant.WechatConsts;
 import cc.wechat.sdk.message.req.BaseReq;
 import cc.wechat.service.context.IContextService;
 import cc.wechat.service.context.bean.LastReqInfo;
-import cc.wechat.service.session.ISessionService;
+import cc.wechat.service.session.SessionService;
 import cc.wechat.utils.BeanUtil;
 import cc.wechat.web.WechatController;
 
@@ -22,7 +22,7 @@ public class ContextualInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(ContextualInterceptor.class);
 
 	@Autowired
-	private ISessionService sessionService;
+	private SessionService sessionService;
 
 	// @Override
 	// public boolean preHandle(HttpServletRequest request, HttpServletResponse

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cc.wechat.data.service;
+package cc.wechat.data.service.sample;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,12 +27,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import cc.wechat.data.domain.City;
-import cc.wechat.data.domain.Hotel;
-import cc.wechat.data.domain.Rating;
-import cc.wechat.data.domain.RatingCount;
-import cc.wechat.data.domain.Review;
-import cc.wechat.data.domain.ReviewDetails;
+import cc.wechat.data.domain.sample.City;
+import cc.wechat.data.domain.sample.Hotel;
+import cc.wechat.data.domain.sample.Rating;
+import cc.wechat.data.domain.sample.RatingCount;
+import cc.wechat.data.domain.sample.Review;
+import cc.wechat.data.domain.sample.ReviewDetails;
 
 @Component("hotelService")
 @Transactional
