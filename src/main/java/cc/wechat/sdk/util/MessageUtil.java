@@ -81,7 +81,7 @@ public final class MessageUtil {
                 LOG.debug("msgSignature:{}", msgSignature);
                 LOG.debug("timeStamp:{}", timeStamp);
                 LOG.debug("nonce:{}", nonce);
-                String encrypt = nodelist1.item(0).getTextContent();
+                String encrypt = nodelist1.item(0).getNodeValue();
                 String fromXML = String.format(FORMAT, encrypt);
                 String message = pc.decryptMsg(msgSignature, timeStamp, nonce, fromXML);
                 inputStream = new ByteArrayInputStream(message.getBytes());

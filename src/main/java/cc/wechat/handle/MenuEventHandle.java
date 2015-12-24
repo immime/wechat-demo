@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import cc.wechat.constant.MenuConstant;
 import cc.wechat.sdk.handle.EventHandle;
 import cc.wechat.sdk.message.BaseMsg;
+import cc.wechat.sdk.message.NewsMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.message.req.MenuEvent;
@@ -39,18 +40,20 @@ public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 			String key = ((MenuEvent) event).getEventKey();
 			System.err.println("eventKey" + "|" + key);
 			if(MenuConstant.MENU_CLICK_FUNC_JOKE.equals(key)) {
-				Joke j = jokeService.getRandomJoke();
-				TextMsg msg = new TextMsg();
-				msg.add("《").add(j.getTitle()).add("》").add("\n").add(j.getText());
+//				Joke j = jokeService.queryOneJoke();
+//				TextMsg msg = new TextMsg();
+//				msg.add("《").add(j.getTitle()).add("》").add("\n").add(j.getText());
+				
+				NewsMsg msg = jokeService.queryJokeNewsMsg(event);
 				return msg;
 			} 
 			if (MenuConstant.MENU_CLICK_FUNC_WEATHER.equals(key)) {
 				CityParam cityInfo = new CityParam();
 				cityInfo.setArea("北京");
 				
-				weatherService.queryWeatherBaseResponse(cityInfo);
+				return weatherService.queryWeatherNewsMsg(cityInfo);
 				
-				return weatherService.queryWeatherTextMsg(cityInfo);
+//				return weatherService.queryWeatherTextMsg(cityInfo);
 			}
 		}
 		return null;

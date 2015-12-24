@@ -2,27 +2,27 @@ package cc.wechat.sdk.message;
 
 import cc.wechat.sdk.message.util.MessageBuilder;
 
-public class Article {
+public class ArticleMsg {
 
     private String title;
     private String description;
     private String picUrl;
     private String url;
 
-    public Article() {
+    public ArticleMsg() {
 
     }
 
-    public Article(String title) {
+    public ArticleMsg(String title) {
         this.title = title;
     }
 
-    public Article(String title, String url) {
+    public ArticleMsg(String title, String url) {
         this.title = title;
         this.url = url;
     }
 
-    public Article(String title, String description, String picUrl, String url) {
+    public ArticleMsg(String title, String description, String picUrl, String url) {
         this.title = title;
         this.description = description;
         this.picUrl = picUrl;

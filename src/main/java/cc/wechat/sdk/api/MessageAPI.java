@@ -12,7 +12,7 @@ import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.enums.ResultType;
 import cc.wechat.sdk.api.response.BaseResponse;
 import cc.wechat.sdk.api.response.GetSendMessageResponse;
-import cc.wechat.sdk.message.Article;
+import cc.wechat.sdk.message.ArticleMsg;
 import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.ImageMsg;
 import cc.wechat.sdk.message.MpNewsMsg;
@@ -148,8 +148,8 @@ public class MessageAPI extends BaseAPI {
             params.put("msgtype", "news");
             Map<String, Object> news = new HashMap<String, Object>();
             List<Object> articles = new ArrayList<Object>();
-            List<Article> list = msg.getArticles();
-            for (Article article : list) {
+            List<ArticleMsg> list = msg.getArticles();
+            for (ArticleMsg article : list) {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("title", article.getTitle());
                 map.put("description", article.getDescription());

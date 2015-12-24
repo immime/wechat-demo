@@ -9,7 +9,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cc.wechat.sdk.message.Article;
+import cc.wechat.sdk.message.ArticleMsg;
 import cc.wechat.sdk.util.StreamUtil;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -28,7 +28,7 @@ public class DownloadMaterialResponse extends BaseResponse {
 
     // 当素材是图文素材的时候
     @JSONField(name="news_item")
-    private List<Article> news;
+    private List<ArticleMsg> news;
 
     // 当素材是视频素材的时候
     @JSONField(name="title")
@@ -41,11 +41,11 @@ public class DownloadMaterialResponse extends BaseResponse {
     private byte[] content;
     private String fileName;
 
-    public List<Article> getNews() {
+    public List<ArticleMsg> getNews() {
         return news;
     }
 
-    public void setNews(List<Article> news) {
+    public void setNews(List<ArticleMsg> news) {
         this.news = news;
     }
 

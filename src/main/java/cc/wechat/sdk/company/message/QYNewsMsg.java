@@ -36,7 +36,7 @@ public class QYNewsMsg extends QYBaseMsg {
         this.news = news;
     }
 
-    public void setArticles(List<QYArticle> articles){
+    public void setArticles(List<QYArticleMsg> articles){
         if(articles.size() > MAX_ARTICLE_COUNT){
             articles = articles.subList(0, MAX_ARTICLE_COUNT);
         }

@@ -1,6 +1,6 @@
 package cc.wechat.sdk.company.message;
 
-import cc.wechat.sdk.message.Article;
+import cc.wechat.sdk.message.ArticleMsg;
 
 /**
  *  
@@ -11,9 +11,9 @@ import cc.wechat.sdk.message.Article;
  *  @version 1.0.beta
  *  ====================================================================
  */
-public class QYArticle extends Article {
+public class QYArticleMsg extends ArticleMsg {
 
-    public QYArticle(String title, String description, String picUrl, String url) {
+    public QYArticleMsg(String title, String description, String picUrl, String url) {
         super(title, description, picUrl, url);
     }
 }

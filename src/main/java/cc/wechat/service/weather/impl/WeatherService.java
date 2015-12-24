@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.tools.javac.code.Attribute.Array;
 
 import cc.wechat.config.ApiConfigCenter;
 import cc.wechat.openapi.ApiStoreClient;
@@ -22,8 +24,11 @@ import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.entity.Article;
 import cc.wechat.sdk.api.response.BaseResponse;
 import cc.wechat.sdk.api.response.UploadMaterialResponse;
+import cc.wechat.sdk.message.ArticleMsg;
+import cc.wechat.sdk.message.NewsMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.service.weather.IWeatherService;
+import cc.wechat.service.weather.bean.CityInfo;
 import cc.wechat.service.weather.bean.CityParam;
 import cc.wechat.service.weather.bean.resp.CityResult;
 import cc.wechat.service.weather.bean.resp.Now;
@@ -77,15 +82,28 @@ public class WeatherService implements IWeatherService {
 	}
 
 	@Override
-	public BaseResponse queryWeatherBaseResponse(CityParam cityInfo) throws ApiStoreException {
-		// TODO Auto-generated method stub
+	public NewsMsg queryWeatherNewsMsg(CityParam cityInfo) throws ApiStoreException {
+		// TODO 跳网页处理，否则5s内无法完成回复
 		ApiConfig config = ApiConfigCenter.getCongig();
 		MaterialAPI materialAPI = new MaterialAPI(config);
-        Article article = new Article("VnzJFSwv05ezhWSlU3kV6fmFYxHXaIHQMxx2SjX87fg", "测试", "测试", "http://www.baidu.com", "测试新闻。无意义", "测试新闻。无意义", Article.ShowConverPic.YES);
-        UploadMaterialResponse response = materialAPI.uploadMaterialNews(Arrays.asList(article));
 		Weather w = this.queryWeather(cityInfo);
+		
+		
+		
+		CityInfo city = w.getCityInfo();
+		String cityName = city.getC9() + city.getC7() + city.getC5() + city.getC3();
+		
+		
+        Article article = new Article("twcBNCdySHHdz_3ivG6CR3J5mXKlqxvim4Eu_3rWHYI", "测试", "测试", "http://www.baidu.com", "测试新闻。无意义", "测试新闻。无意义", Article.ShowConverPic.YES);
+        UploadMaterialResponse response = materialAPI.uploadMaterialNews(Arrays.asList(article));
 		response.getMediaId();
-		return null;
+		
+		
+		
+		NewsMsg msg = new NewsMsg();
+		ArticleMsg articleMsg = new ArticleMsg("测试", "测试", "http://mmbiz.qpic.cn/mmbiz/mwALhW5iaRqfsxEkQJMvPf0QZRiaHCCvibAWTc1jwDYLVJGSHDMMIDtMgAmf7TYZ0XPia0HyNRMWQQL5icC1Pz8xytA/0", "http://mp.weixin.qq.com/s?__biz=MzA5OTIxNTA2Mg==&mid=401010288&idx=1&sn=9a022a3338bd23a283c21c64e3cd17a1#rd");
+		msg.setArticles(Arrays.asList(articleMsg));
+		return msg;
 	}
 
 }

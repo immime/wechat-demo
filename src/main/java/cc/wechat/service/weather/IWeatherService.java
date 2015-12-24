@@ -2,6 +2,7 @@ package cc.wechat.service.weather;
 
 import cc.wechat.openapi.exception.ApiStoreException;
 import cc.wechat.sdk.api.response.BaseResponse;
+import cc.wechat.sdk.message.NewsMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.service.weather.bean.CityParam;
 import cc.wechat.service.weather.bean.resp.Weather;
@@ -24,6 +25,6 @@ public interface IWeatherService {
 	
 	TextMsg queryWeatherTextMsg(CityParam cityInfo) throws ApiStoreException;
 	
-	BaseResponse queryWeatherBaseResponse(CityParam cityInfo) throws ApiStoreException;
+	NewsMsg queryWeatherNewsMsg(CityParam cityInfo) throws ApiStoreException;
 
 }

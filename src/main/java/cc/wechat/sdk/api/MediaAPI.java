@@ -24,7 +24,7 @@ import cc.wechat.sdk.api.response.BaseResponse;
 import cc.wechat.sdk.api.response.DownloadMediaResponse;
 import cc.wechat.sdk.api.response.UploadImgResponse;
 import cc.wechat.sdk.api.response.UploadMediaResponse;
-import cc.wechat.sdk.message.Article;
+import cc.wechat.sdk.message.ArticleMsg;
 import cc.wechat.sdk.util.JSONUtil;
 import cc.wechat.sdk.util.NetWorkCenter;
 import cc.wechat.sdk.util.StreamUtil;
@@ -63,7 +63,7 @@ public class MediaAPI extends BaseAPI {
      * @param articles 上传的文章信息
      * @return 响应对象
      */
-    public UploadMediaResponse uploadNews(List<Article> articles){
+    public UploadMediaResponse uploadNews(List<ArticleMsg> articles){
         UploadMediaResponse response;
         String url = BASE_API_URL + "cgi-bin/media/uploadnews?access_token=#";
         final Map<String, Object> params = new HashMap<String, Object>();

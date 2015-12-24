@@ -12,18 +12,18 @@ public class NewsMsg extends BaseMsg {
 
     private static final int WX_MAX_SIZE = 10;
     private              int maxSize     = WX_MAX_SIZE;
-    private List<Article> articles;
+    private List<ArticleMsg> articles;
 
     public NewsMsg() {
-        this.articles = new ArrayList<Article>(maxSize);
+        this.articles = new ArrayList<ArticleMsg>(maxSize);
     }
 
     public NewsMsg(int maxSize) {
         setMaxSize(maxSize);
-        this.articles = new ArrayList<Article>(maxSize);
+        this.articles = new ArrayList<ArticleMsg>(maxSize);
     }
 
-    public NewsMsg(List<Article> articles) {
+    public NewsMsg(List<ArticleMsg> articles) {
         setArticles(articles);
     }
 
@@ -40,11 +40,11 @@ public class NewsMsg extends BaseMsg {
         }
     }
 
-    public List<Article> getArticles() {
+    public List<ArticleMsg> getArticles() {
         return articles;
     }
 
-    public void setArticles(List<Article> articles) {
+    public void setArticles(List<ArticleMsg> articles) {
         if (articles.size() > this.maxSize) {
             this.articles = articles.subList(0, this.maxSize);
         } else {
@@ -61,14 +61,14 @@ public class NewsMsg extends BaseMsg {
     }
 
     public void add(String title, String picUrl, String url) {
-        add(new Article(title, null, picUrl, url));
+        add(new ArticleMsg(title, null, picUrl, url));
     }
 
     public void add(String title, String description, String picUrl, String url) {
-        add(new Article(title, description, picUrl, url));
+        add(new ArticleMsg(title, description, picUrl, url));
     }
 
-    public void add(Article article) {
+    public void add(ArticleMsg article) {
         if (this.articles.size() < maxSize) {
             this.articles.add(article);
         }
@@ -80,7 +80,7 @@ public class NewsMsg extends BaseMsg {
         mb.addData("MsgType", RespType.NEWS);
         mb.addTag("ArticleCount", String.valueOf(articles.size()));
         mb.append("<Articles>\n");
-        for (Article article : articles) {
+        for (ArticleMsg article : articles) {
             mb.append(article.toXml());
         }
         mb.append("</Articles>\n");
