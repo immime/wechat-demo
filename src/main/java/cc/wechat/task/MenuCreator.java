@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,15 +22,17 @@ import cc.wechat.sdk.exception.WeixinException;
 @Component
 public class MenuCreator {
 	private static final Logger logger = LoggerFactory.getLogger(MenuCreator.class);
+	@Autowired
+	private ApiConfigCenter apiConfigCenter;
 	/**
 	 * 每隔2小时（115分钟）刷新一次
 	 * @return
 	 * @throws FailedToGetTokenException 
 	 */
 	@Scheduled(fixedRate = 1000 * 60 * 115)
-	private static void refresh() throws WeixinException {
+	private void refresh() throws WeixinException {
 		
-        ApiConfig config = ApiConfigCenter.getCongig();
+        ApiConfig config = apiConfigCenter.getConfig();
         
         Menu request = new Menu();
         //准备一级主菜单

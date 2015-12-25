@@ -40,12 +40,7 @@ public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 			String key = ((MenuEvent) event).getEventKey();
 			System.err.println("eventKey" + "|" + key);
 			if(MenuConstant.MENU_CLICK_FUNC_JOKE.equals(key)) {
-//				Joke j = jokeService.queryOneJoke();
-//				TextMsg msg = new TextMsg();
-//				msg.add("《").add(j.getTitle()).add("》").add("\n").add(j.getText());
-				
-				NewsMsg msg = jokeService.queryJokeNewsMsg(event);
-				return msg;
+				return jokeService.queryOneJokeTextMsg();
 			} 
 			if (MenuConstant.MENU_CLICK_FUNC_WEATHER.equals(key)) {
 				CityParam cityInfo = new CityParam();

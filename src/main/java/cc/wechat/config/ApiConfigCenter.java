@@ -1,14 +1,19 @@
 package cc.wechat.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import cc.wechat.handle.TestConfigChangeHandle;
 import cc.wechat.sdk.api.config.ApiConfig;
 
+@Component
 public class ApiConfigCenter {
 	
-	public static ApiConfig getCongig() {
-		String appid = "wx8c33ff895df5d0d9";
-		String secret = "0705aafac0bef944de4c485d71fce900";
-		ApiConfig config = new ApiConfig(appid, secret);
+	@Autowired
+	private WechatProperties wechatProperties;
+	
+	public ApiConfig getConfig() {
+		ApiConfig config = new ApiConfig(wechatProperties.getAppID(), wechatProperties.getAppSecret());
 		TestConfigChangeHandle configChangeHandle = new TestConfigChangeHandle();
 		config.addHandle(configChangeHandle);
 		return config;

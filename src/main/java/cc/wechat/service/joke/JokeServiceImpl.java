@@ -1,27 +1,19 @@
 package cc.wechat.service.joke;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
 import cc.wechat.config.ApiConfigCenter;
-import cc.wechat.constant.WechatConsts;
 import cc.wechat.data.domain.Joke;
 import cc.wechat.data.repository.JokeRepository;
-import cc.wechat.openapi.ApiStoreClient;
-import cc.wechat.openapi.exception.ApiStoreException;
 import cc.wechat.sdk.api.MaterialAPI;
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.entity.Article;
@@ -30,6 +22,7 @@ import cc.wechat.sdk.api.response.DownloadMaterialResponse;
 import cc.wechat.sdk.api.response.UploadMaterialResponse;
 import cc.wechat.sdk.message.ArticleMsg;
 import cc.wechat.sdk.message.NewsMsg;
+import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReq;
 
 @Service("jokeService")
@@ -37,49 +30,32 @@ import cc.wechat.sdk.message.req.BaseReq;
 public class JokeServiceImpl implements JokeService {
 	
 	@Autowired
+	private ApiConfigCenter apiConfigCenter;
+	@Autowired
 	private JokeRepository jokeRepository;
 
 	//TODO 请求一次api返回二十条，应该缓存起来，用户重复点击时优先使用缓存。这样少消耗api请求次数
 	
 	@Override
-	public Joke queryOneJoke() {
-		List<Joke> jokes = this.queryBatchJokes();
-		Joke j = new Joke();
-		if(CollectionUtils.isNotEmpty(jokes)) {
-			int size = jokes.size();
-			Random random = new Random();
-			int index = random.nextInt(size);
-			j = jokes.get(index);
-		}
-		return j;
-	}
-
-	@Override
-	public List<Joke> queryBatchJokes() {
+	public Joke findRandomOne() {
+		Iterable<Joke> jokes = this.jokeRepository.findAll();
+		Iterator<Joke> i = jokes.iterator();
+		List<Joke> list = IteratorUtils.toList(i);
+		int size = list.size();
 		Random random = new Random();
-		int index = random.nextInt(10);
-		String uri = "http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text?page=" + index;
-		RestTemplate restTemplate = new RestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("apikey", WechatConsts.BAIDU_API_KEY);
-		HttpEntity<Object> request = new HttpEntity<Object>(headers);
-		String rawResult = restTemplate.postForObject(uri, request, String.class);
-		JSONObject rawJsonObj = JSON.parseObject(rawResult);  
-		JSONObject bodyJsonObj = rawJsonObj.getJSONObject("showapi_res_body");
-		
-		JSONArray result = bodyJsonObj.getJSONArray("contentlist");  
-		List<Joke> jokes= JSON.parseArray(result.toJSONString(),Joke.class);
-		
-		return jokes;
+		int index = random.nextInt(size);
+		return list.get(index);
 	}
 
 	@Override
-	public NewsMsg queryJokeNewsMsg(BaseReq req) throws ApiStoreException {
-		// TODO Auto-generated method stub
-		ApiConfig config = ApiConfigCenter.getCongig();
+	public NewsMsg queryJokeNewsMsg(BaseReq req) {
+		ApiConfig config = apiConfigCenter.getConfig();
 		MaterialAPI materialAPI = new MaterialAPI(config);
 		
-		List<Joke> jokes = this.queryBatchJokes();
+		Iterable<Joke> results = this.jokeRepository.findAll();
+		Iterator<Joke> iterator = results.iterator();
+		List<Joke> jokes = IteratorUtils.toList(iterator);
+		
 		List<Article> articles = new ArrayList<>();
 		
 		if(CollectionUtils.isNotEmpty(jokes)) {
@@ -104,18 +80,17 @@ public class JokeServiceImpl implements JokeService {
 	}
 
 	@Override
-	public void batchPersist() {
-		// TODO Auto-generated method stub
-		JSONObject bodyJsonObj =  ApiStoreClient.post("/showapi_joke/joke_text?page=1", null);
-		
-		JSONArray result = bodyJsonObj.getJSONArray("contentlist"); 
-		List<Joke> jokes= JSON.parseArray(result.toJSONString(),Joke.class);
-		
+	public void batchPersist(List<Joke> jokes) {
 		jokeRepository.save(jokes);
 	}
 
-	
-
+	@Override
+	public TextMsg queryOneJokeTextMsg() {
+		Joke j = this.findRandomOne();
+		TextMsg msg = new TextMsg();
+		msg.add("《").add(j.getTitle()).add("》").add("\n").add(j.getText());
+		return msg;
+	}
 
 
 }

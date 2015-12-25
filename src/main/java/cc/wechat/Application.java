@@ -8,15 +8,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import cc.wechat.config.AppConfig;
+import cc.wechat.config.WechatProperties;
 
 @SpringBootApplication
 @EnableScheduling
 @Import(AppConfig.class)
+@EnableConfigurationProperties({ WechatProperties.class })
 public class Application {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);

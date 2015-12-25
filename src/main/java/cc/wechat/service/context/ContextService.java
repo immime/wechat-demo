@@ -37,7 +37,7 @@ public class ContextService implements IContextService {
 			weatherMenu.append("2.发送你的地理位置");
 			break;
 		case MenuConstant.MENU_CLICK_FUNC_JOKE:
-			Joke j = jokeService.queryOneJoke();
+			Joke j = jokeService.findRandomOne();
 			weatherMenu.append("《")
 					   .append(j.getTitle())
 					   .append("\n")
