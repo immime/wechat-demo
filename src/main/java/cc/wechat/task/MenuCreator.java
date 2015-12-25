@@ -62,8 +62,8 @@ public class MenuCreator {
         MenuButton main2 = new MenuButton();
         main2.setType(MenuType.VIEW);
         main2.setKey(MenuConstant.MENU_CLICK_PAGE);
-        main2.setName("页面");
-        main2.setUrl("https://qiqi.localtunnel.me");
+        main2.setName("JS-demo页面");
+        main2.setUrl("http://qiqi.localtunnel.me/views/demo.html");
         
 
         List<MenuButton> mainList = new ArrayList<MenuButton>();
