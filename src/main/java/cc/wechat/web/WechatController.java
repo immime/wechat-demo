@@ -8,8 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cc.wechat.config.ApiConfigCenter;
+import cc.wechat.sdk.api.JsAPI;
+import cc.wechat.sdk.api.config.ApiConfig;
+import cc.wechat.sdk.api.response.BaseResponse;
+import cc.wechat.sdk.api.response.GetSignatureResponse;
 import cc.wechat.sdk.handle.EventHandle;
 import cc.wechat.sdk.handle.MessageHandle;
 import cc.wechat.sdk.message.BaseMsg;
@@ -19,17 +25,32 @@ import cc.wechat.sdk.servlet.WeixinControllerSupport;
 import cc.wechat.service.session.SessionService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/wechat")
 public class WechatController extends WeixinControllerSupport {
 	private static final Logger logger = LoggerFactory.getLogger(WechatController.class);
 	private static final String TOKEN = "myqiqi";
 
+	@Autowired
+	private ApiConfigCenter apiConfigCenter;
 	@Autowired
 	private SessionService sessionService;
 	@Autowired
 	private EventHandle<BaseReqEvent> menuEventHandle;
 	private MessageHandle<BaseReqEvent> defaultMessageHandle;
 	private MessageHandle<BaseReqEvent> robotMessageHandle;
+	
+	/**
+	 * js指纹验证
+	 * @param url
+	 * @return
+	 */
+	@RequestMapping("/jsSignature")
+	public BaseResponse helloWorld(@RequestParam String url) {
+		ApiConfig config = apiConfigCenter.getConfig();
+		JsAPI api = new JsAPI(config);
+		GetSignatureResponse response = api.getSignature(url);
+		return response;
+	}
 
 	@Override
 	protected String getToken() {

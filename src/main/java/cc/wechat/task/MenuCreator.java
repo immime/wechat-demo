@@ -58,10 +58,17 @@ public class MenuCreator {
         //将子菜单放入主菜单里
         main1.setSubButton(list);
         
+        //准备一级主菜单
+        MenuButton main2 = new MenuButton();
+        main2.setType(MenuType.VIEW);
+        main2.setKey(MenuConstant.MENU_CLICK_PAGE);
+        main2.setName("页面");
+        main2.setUrl("https://qiqi.localtunnel.me");
         
 
         List<MenuButton> mainList = new ArrayList<MenuButton>();
         mainList.add(main1);
+        mainList.add(main2);
         //将主菜单加入请求对象
         request.setButton(mainList);
         logger.debug(request.toJsonString());
