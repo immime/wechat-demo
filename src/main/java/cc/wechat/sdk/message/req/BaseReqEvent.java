@@ -6,7 +6,7 @@ public class BaseReqEvent extends BaseReq {
     private String event;
 
     public BaseReqEvent() {
-        setMsgType(ReqType.event.name());
+        setMsgType(ReqType.event);
     }
 
     public String getEvent() {

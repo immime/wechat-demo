@@ -9,6 +9,7 @@ import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReq;
 
 public interface JokeService {
+	void init(int size);
 	/**
 	 * 批量持久化
 	 * @param jokes TODO

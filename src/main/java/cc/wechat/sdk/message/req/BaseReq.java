@@ -5,7 +5,7 @@ public class BaseReq {
     String toUserName;
     String fromUserName;
     long   createTime;
-    String msgType;
+    ReqType msgType;
 
     public String getToUserName() {
         return toUserName;
@@ -31,11 +31,11 @@ public class BaseReq {
         this.createTime = createTime;
     }
 
-    public String getMsgType() {
+    public ReqType getMsgType() {
         return msgType;
     }
 
-    public void setMsgType(String msgType) {
+    public void setMsgType(ReqType msgType) {
         this.msgType = msgType;
     }
 

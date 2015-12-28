@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EnumType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -57,7 +58,7 @@ public abstract class WeixinSupport {
 
 	protected String fromUserName;
 	protected String toUserName;
-	protected String reqMsgType;
+	protected ReqType reqMsgType;
 	protected BaseReq reqMsg = null;
 
 	/**
@@ -144,13 +145,12 @@ public abstract class WeixinSupport {
 		Map<String, Object> reqMap = MessageUtil.parseXml(request, getToken(), getAppId(), getAESKey());
 		fromUserName = (String) reqMap.get("FromUserName");
 		toUserName = (String) reqMap.get("ToUserName");
-		reqMsgType = (String) reqMap.get("MsgType");
+		reqMsgType = Enum.valueOf(ReqType.class, reqMap.get("MsgType").toString());
 
 		LOG.debug("收到消息,消息类型:{}", reqMsgType);
 
 		BaseMsg respMsg = null;
-		ReqType type = ReqType.valueOf(reqMsgType);
-		switch (type) {
+		switch (reqMsgType) {
 		case event: {
 			String eventType = (String) reqMap.get("Event");
 			String ticket = (String) reqMap.get("Ticket");
@@ -665,7 +665,8 @@ public abstract class WeixinSupport {
 	}
 
 	private void addBasicReqParams(Map<String, Object> reqMap, BaseReq req) {
-		req.setMsgType((String) reqMap.get("MsgType"));
+		reqMsgType = Enum.valueOf(ReqType.class, reqMap.get("MsgType").toString());
+		req.setMsgType(reqMsgType);
 		req.setFromUserName((String) reqMap.get("FromUserName"));
 		req.setToUserName((String) reqMap.get("ToUserName"));
 		req.setCreateTime(Long.parseLong((String) reqMap.get("CreateTime")));
@@ -694,11 +695,11 @@ public abstract class WeixinSupport {
 		this.toUserName = toUserName;
 	}
 
-	public String getReqMsgType() {
+	public ReqType getReqMsgType() {
 		return reqMsgType;
 	}
 
-	public void setReqMsgType(String reqMsgType) {
+	public void setReqMsgType(ReqType reqMsgType) {
 		this.reqMsgType = reqMsgType;
 	}
 

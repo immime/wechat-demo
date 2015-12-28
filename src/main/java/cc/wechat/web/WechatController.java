@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cc.wechat.config.ApiConfigCenter;
+import cc.wechat.handle.ContextMessageHandle;
+import cc.wechat.handle.DefaultMessageHandle;
+import cc.wechat.handle.MenuEventHandle;
+import cc.wechat.handle.RobotMessageHandle;
 import cc.wechat.sdk.api.JsAPI;
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.response.BaseResponse;
@@ -22,6 +26,7 @@ import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
+import cc.wechat.service.context.ContextService;
 import cc.wechat.service.session.SessionService;
 
 @RestController
@@ -35,9 +40,13 @@ public class WechatController extends WeixinControllerSupport {
 	@Autowired
 	private SessionService sessionService;
 	@Autowired
-	private EventHandle<BaseReqEvent> menuEventHandle;
-	private MessageHandle<BaseReqEvent> defaultMessageHandle;
-	private MessageHandle<BaseReqEvent> robotMessageHandle;
+	private MenuEventHandle menuEventHandle;
+	@Autowired
+	private DefaultMessageHandle defaultMessageHandle;
+	@Autowired
+	private RobotMessageHandle robotMessageHandle;
+	@Autowired
+	private ContextMessageHandle contextMessageHandle;
 	
 	/**
 	 * js指纹验证
@@ -63,15 +72,16 @@ public class WechatController extends WeixinControllerSupport {
 		// TODO Auto-generated method stub
 		System.err.println("autowire SUCCESS:" + (menuEventHandle != null));
 		List<MessageHandle> handles = new ArrayList<MessageHandle>();
-		handles.add(defaultMessageHandle);
+		handles.add(contextMessageHandle);
 		handles.add(robotMessageHandle);
+		handles.add(defaultMessageHandle);
 		return handles;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected List<EventHandle> initEventHandles() {
-		// TODO Auto-generated method stub
+		// TODO 个人订阅号开发者模式的自定义菜单无效
 		List<EventHandle> handles = new ArrayList<EventHandle>();
 		handles.add(menuEventHandle);
 		return handles;

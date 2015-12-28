@@ -11,7 +11,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import cc.wechat.constant.WechatConsts;
 import cc.wechat.sdk.message.req.BaseReq;
-import cc.wechat.service.context.IContextService;
+import cc.wechat.sdk.message.req.ReqType;
+import cc.wechat.service.context.ContextService;
 import cc.wechat.service.context.bean.LastReqInfo;
 import cc.wechat.service.session.SessionService;
 import cc.wechat.utils.BeanUtil;
@@ -46,7 +47,7 @@ public class ContextualInterceptor extends HandlerInterceptorAdapter {
 		if (bean instanceof WechatController) {
 			WechatController ctrl = (WechatController) bean;
 			String fromUserName = ctrl.getFromUserName();
-			String reqMsgType = ctrl.getReqMsgType();
+			ReqType reqMsgType = ctrl.getReqMsgType();
 			BaseReq reqMsg = ctrl.getReqMsg();
 			
 			LastReqInfo lastMsgInfo = new LastReqInfo(fromUserName, reqMsgType, reqMsg);

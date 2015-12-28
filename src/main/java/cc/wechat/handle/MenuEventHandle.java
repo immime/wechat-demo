@@ -10,7 +10,8 @@ import cc.wechat.sdk.message.NewsMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.message.req.MenuEvent;
-import cc.wechat.service.context.IContextService;
+import cc.wechat.sdk.message.req.ReqType;
+import cc.wechat.service.context.ContextService;
 import cc.wechat.service.joke.JokeService;
 import cc.wechat.service.joke.bean.Joke;
 import cc.wechat.service.session.SessionService;
@@ -25,7 +26,7 @@ public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 	@Autowired
 	public SessionService sessionService;
 	@Autowired
-	public	IContextService contextService;
+	public	ContextService contextService;
 	@Autowired
 	private JokeService jokeService;
 	@Autowired
@@ -59,8 +60,8 @@ public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 		// TODO Auto-generated method stub
 		System.out.println("before handle...");
 		
-		String type = event.getMsgType();
-		System.out.println(type);
+		ReqType type = event.getMsgType();
+		System.out.println(type.name());
 		return true;
 	}
 

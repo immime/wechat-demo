@@ -15,7 +15,7 @@ public final class VoiceReqMsg extends BaseReqMsg {
         this.mediaId = mediaId;
         this.format = format;
         this.recognition = recognition;
-        setMsgType(ReqType.voice.name());
+        setMsgType(ReqType.voice);
     }
 
     public String getMediaId() {

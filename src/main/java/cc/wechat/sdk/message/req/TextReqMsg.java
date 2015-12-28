@@ -8,7 +8,7 @@ public final class TextReqMsg extends BaseReqMsg {
     public TextReqMsg(String content) {
         super();
         this.content = content;
-        setMsgType(ReqType.text.name());
+        setMsgType(ReqType.text);
     }
 
     public String getContent() {

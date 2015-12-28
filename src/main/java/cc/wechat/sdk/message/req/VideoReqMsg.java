@@ -10,7 +10,7 @@ public final class VideoReqMsg extends BaseReqMsg {
         super();
         this.mediaId = mediaId;
         this.thumbMediaId = thumbMediaId;
-        setMsgType(ReqType.video.name());
+        setMsgType(ReqType.video);
     }
 
     public String getMediaId() {

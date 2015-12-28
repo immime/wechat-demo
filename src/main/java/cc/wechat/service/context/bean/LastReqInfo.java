@@ -3,6 +3,7 @@ package cc.wechat.service.context.bean;
 import java.io.Serializable;
 
 import cc.wechat.sdk.message.req.BaseReq;
+import cc.wechat.sdk.message.req.ReqType;
 
 
 /**
@@ -14,12 +15,12 @@ public class LastReqInfo implements Serializable {
 	private static final long serialVersionUID = -4035906123516189719L;
 	
 	private String fromUserName;
-    private String reqMsgType;
+    private ReqType reqMsgType;
     private BaseReq reqMsg;
     
     public LastReqInfo() {
 	}
-	public LastReqInfo(String fromUserName, String reqMsgType, BaseReq reqMsg) {
+	public LastReqInfo(String fromUserName, ReqType reqMsgType, BaseReq reqMsg) {
 		super();
 		this.fromUserName = fromUserName;
 		this.reqMsgType = reqMsgType;
@@ -32,10 +33,10 @@ public class LastReqInfo implements Serializable {
 	public void setFromUserName(String fromUserName) {
 		this.fromUserName = fromUserName;
 	}
-	public String getReqMsgType() {
+	public ReqType getReqMsgType() {
 		return reqMsgType;
 	}
-	public void setReqMsgType(String reqMsgType) {
+	public void setReqMsgType(ReqType reqMsgType) {
 		this.reqMsgType = reqMsgType;
 	}
 	public BaseReq getReqMsg() {

@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cc.wechat.config.ApiConfigCenter;
+import cc.wechat.constant.WechatConsts;
 import cc.wechat.openapi.ApiStoreClient;
 import cc.wechat.openapi.exception.ApiStoreException;
 import cc.wechat.sdk.api.MaterialAPI;
@@ -39,10 +40,11 @@ public class WeatherServiceImpl implements WeatherService {
 	
 	@Override
 	public String queryCreaid(String zhName) {
-		String path = "/weather_showapi/areaid?area={area}";
+		String path = "/showapi_open_bus/weather_showapi/areaid?area={area}";
 		Map<String, String> params = Collections.singletonMap("area", "北京");
 		JSONObject bodyJsonObj = ApiStoreClient.get(path, params);
-		
+		bodyJsonObj = assertSuccess(path, bodyJsonObj);
+
 		JSONArray result = bodyJsonObj.getJSONArray("list"); 
 		List<CityResult> list= JSON.parseArray(result.toJSONString(),CityResult.class);
 		if(CollectionUtils.isNotEmpty(list)) {
@@ -54,9 +56,10 @@ public class WeatherServiceImpl implements WeatherService {
 
 	@Override
 	public Weather queryWeather(CityParam cityInfo) {
-		String path = "/weather_showapi/address?area={area}&areaid={areaid}";
+		String path = "/showapi_open_bus/weather_showapi/address?area={area}&areaid={areaid}";
 			
 		JSONObject bodyJsonObj = ApiStoreClient.get(path, cityInfo);
+		bodyJsonObj = assertSuccess(path, bodyJsonObj);
 		Weather w = JSON.toJavaObject(bodyJsonObj, Weather.class);
 		return w;
 	}
@@ -100,6 +103,26 @@ public class WeatherServiceImpl implements WeatherService {
 		ArticleMsg articleMsg = new ArticleMsg("测试", "测试", "http://mmbiz.qpic.cn/mmbiz/mwALhW5iaRqfsxEkQJMvPf0QZRiaHCCvibAWTc1jwDYLVJGSHDMMIDtMgAmf7TYZ0XPia0HyNRMWQQL5icC1Pz8xytA/0", "http://mp.weixin.qq.com/s?__biz=MzA5OTIxNTA2Mg==&mid=401010288&idx=1&sn=9a022a3338bd23a283c21c64e3cd17a1#rd");
 		msg.setArticles(Arrays.asList(articleMsg));
 		return msg;
+	}
+	
+	/**
+	 * 拦截api请求错误
+	 * 
+	 * @param url
+	 * @param rawJsonObj
+	 * @return
+	 */
+	private JSONObject assertSuccess(String url, JSONObject rawJsonObj) {
+		Integer showapiResCode = rawJsonObj.getInteger("showapi_res_code");
+		if (showapiResCode == null || showapiResCode != 0) {
+			throw new ApiStoreException(url, rawJsonObj.getString("showapi_res_error"));
+		}
+		JSONObject bodyJsonObj = rawJsonObj.getJSONObject("showapi_res_body");
+		Integer retCode = bodyJsonObj.getInteger("ret_code");
+		if (retCode != null && retCode == -1) {
+			throw new ApiStoreException(url, bodyJsonObj.getString("remark"));
+		}
+		return bodyJsonObj;
 	}
 
 }

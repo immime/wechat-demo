@@ -12,7 +12,7 @@ public final class LinkReqMsg extends BaseReqMsg {
         this.title = title;
         this.description = description;
         this.url = url;
-        setMsgType(ReqType.event.name());
+        setMsgType(ReqType.event);
     }
 
     public String getTitle() {

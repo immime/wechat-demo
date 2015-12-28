@@ -1,9 +1,12 @@
 package cc.wechat.handle;
 
+import org.springframework.stereotype.Component;
+
 import cc.wechat.sdk.handle.MessageHandle;
 import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.req.BaseReqMsg;
 
+@Component("defaultMessageHandle")
 public class DefaultMessageHandle implements MessageHandle<BaseReqMsg> {
 	
 	@Override
