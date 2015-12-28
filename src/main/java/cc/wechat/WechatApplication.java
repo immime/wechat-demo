@@ -20,9 +20,9 @@ import cc.wechat.config.WechatProperties;
 @EnableScheduling
 @Import(AppConfig.class)
 @EnableConfigurationProperties({ WechatProperties.class })
-public class Application {
+public class WechatApplication {
 	
-	private static final Logger logger = LoggerFactory.getLogger(Application.class);
+	private static final Logger logger = LoggerFactory.getLogger(WechatApplication.class);
 	
 	@PostConstruct
 	public void logSomething() {
@@ -34,7 +34,7 @@ public class Application {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(WechatApplication.class, args);
 	}
 	
 	@Bean
