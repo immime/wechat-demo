@@ -1,34 +1,82 @@
-[
-    {
-        "code": "m|1",
-        "displayName": "讲个笑话",
-        "children": [
-            {
-                "code": "m|1|1",
-                "displayName": "讲个笑话1",
-                "children": []
-            },
-            {
-                "code": "m|1|2",
-                "displayName": "讲个笑话2",
-                "children": []
-            }
-        ]
-    },
-    {
-        "code": "m|2",
-        "displayName": "查天气",
-        "children": [
-            {
-                "code": "m|2|1",
-                "displayName": "查天气1",
-                "children": []
-            },
-            {
-                "code": "m|2|2",
-                "displayName": "查天气2",
-                "children": []
-            }
-        ]
-    }
-]
+{
+    "code": "0",
+    "displayName": "根菜单",
+    "children": [
+        {
+            "code": "0|m",
+            "displayName": "主菜单",
+            "children": [
+                {
+                    "code": "0|m|1",
+                    "displayName": "讲个笑话",
+                    "children": [
+                        {
+                            "code": "0|m|1|1",
+                            "displayName": "讲个笑话1",
+                            "children": []
+                        },
+                        {
+                            "code": "0|m|1|2",
+                            "displayName": "讲个笑话2",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "code": "0|m|2",
+                    "displayName": "查天气",
+                    "children": [
+                        {
+                            "code": "0|m|2|1",
+                            "displayName": "查天气1",
+                            "children": []
+                        },
+                        {
+                            "code": "0|m|2|2",
+                            "displayName": "查天气2",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "0|h",
+            "displayName": "帮助",
+            "children": [
+                {
+                    "code": "0|h|1",
+                    "displayName": "帮助1",
+                    "children": [
+                        {
+                            "code": "0|h|1|1",
+                            "displayName": "帮助1-1",
+                            "children": []
+                        },
+                        {
+                            "code": "0|h|1|2",
+                            "displayName": "帮助1-2",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "code": "0|h|2",
+                    "displayName": "帮助2",
+                    "children": [
+                        {
+                            "code": "0|h|2|1",
+                            "displayName": "帮助2-1",
+                            "children": []
+                        },
+                        {
+                            "code": "0|h|2|2",
+                            "displayName": "帮助2-2",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

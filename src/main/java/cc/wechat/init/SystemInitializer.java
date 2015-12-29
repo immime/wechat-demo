@@ -2,7 +2,8 @@ package cc.wechat.init;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -26,16 +27,31 @@ public class SystemInitializer {
 	
 	public void initContextMenu() {
 		Resource resource = new ClassPathResource("config/menu.json"); 
+		ContextMenu menu = null;
 		try {
 			InputStream inJson = resource.getInputStream();
 			ObjectMapper mapper = new ObjectMapper();
-			List<ContextMenu> entities = mapper.readValue(inJson, mapper .getTypeFactory().constructCollectionType(List.class, ContextMenu.class));
-			if(CollectionUtils.isNotEmpty(entities)) {
-				contextMenuService.save(entities);
-			}
+			menu = mapper.readValue(inJson, ContextMenu.class);
 		} catch (IOException e) {
 			logger.debug("FAILED to init ContextMenu from json file", e);
 			e.printStackTrace();
+		}
+		Set<ContextMenu> menus = new HashSet<ContextMenu>();
+		recursionAdd(menu, menus);
+		contextMenuService.save(menus);
+		
+	}
+
+	private void recursionAdd(ContextMenu menu, Set<ContextMenu> menus) {
+		if(menu != null) {
+			menus.add(menu);
+			Set<ContextMenu> children = menu.getChildren();
+			if(CollectionUtils.isNotEmpty(children)) {
+				menus.addAll(children);
+				for (ContextMenu child : children) {
+					recursionAdd(child, menus);
+				}
+			}
 		}
 	}
 }

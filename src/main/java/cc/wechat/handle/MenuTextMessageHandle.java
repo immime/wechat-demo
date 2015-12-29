@@ -42,34 +42,16 @@ public class MenuTextMessageHandle implements MessageHandle<BaseReqMsg> {
 		if(context != null && context.getIsActive()) {
 			// 根据面包屑处理
 			String crumb = context.getCrumb();
-			System.err.println("================" + crumb);
+			System.err.println("================hanle请求:" + crumb + "================");
 			
 			if(contextMenuService.isUnderCotextMenu(crumb)) {
 				ContextMenu menu = contextMenuService.findByCode(crumb);
 				TextMsg msg = new TextMsg();
-				msg.add(menu.toString());
+				msg.add(menu.getDisplayName());
+				return msg;
 			}
-			
-//			if (message instanceof TextReqMsg) {
-//				TextReqMsg reqMsg = (TextReqMsg) message;
-//				String inStr = reqMsg.getContent();
-//				String crumb = context.getCrumb();
-//				if (StringUtils.isNotEmpty(inStr)) {
-//					if (StringUtils.startsWithIgnoreCase(crumb, "m|")) {
-//						// TODO do show help stuff
-//					}
-//					if (StringUtils.startsWithIgnoreCase(crumb, "h|")) {
-//						// TODO do show help stuff
-//						crumb = "h|";
-//					}
-//					if ("q".equalsIgnoreCase(inStr)) {
-//						// TODO do exit menu context stuff
-//						context.setIsActive(false);
-//					}
-//				}
-//			}
+
 		}
-		
 
 		return null;
 	}

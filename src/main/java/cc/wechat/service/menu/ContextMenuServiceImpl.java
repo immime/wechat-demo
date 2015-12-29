@@ -14,6 +14,11 @@ public class ContextMenuServiceImpl implements ContextMenuService {
 
 	@Autowired
 	private ContextMenuRepository contextMenuRepository;
+
+	@Override
+	public boolean exists(String code) {
+		return contextMenuRepository.exisitsCode(code);
+	}
 	
 	@Override
 	public Iterable<ContextMenu> findAll() {
@@ -24,7 +29,7 @@ public class ContextMenuServiceImpl implements ContextMenuService {
 	public ContextMenu findByCode(String code) {
 		// TODO Auto-generated method stub
 		Assert.notNull(code, "Parameter 'code' must not be null");
-		ContextMenu menu = contextMenuRepository.findByCode(code);
+		ContextMenu menu = contextMenuRepository.findOne(code);
 		return menu;
 	}
 	
@@ -33,6 +38,11 @@ public class ContextMenuServiceImpl implements ContextMenuService {
 		// TODO Auto-generated method stub
 
 		return null;
+	}
+
+	@Override
+	public void save(ContextMenu entity) {
+		contextMenuRepository.save(entity);
 	}
 
 	@Override
@@ -52,6 +62,5 @@ public class ContextMenuServiceImpl implements ContextMenuService {
 		}
 		return false;
 	}
-
 
 }
