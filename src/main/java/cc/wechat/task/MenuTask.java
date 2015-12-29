@@ -20,8 +20,8 @@ import cc.wechat.sdk.api.enums.ResultType;
 import cc.wechat.sdk.exception.WeixinException;
 
 @Component
-public class MenuCreator {
-	private static final Logger logger = LoggerFactory.getLogger(MenuCreator.class);
+public class MenuTask {
+	private static final Logger logger = LoggerFactory.getLogger(MenuTask.class);
 	@Autowired
 	private ApiConfigCenter apiConfigCenter;
 	/**

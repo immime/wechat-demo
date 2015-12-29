@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cc.wechat.config.ApiConfigCenter;
-import cc.wechat.handle.ContextMessageHandle;
+import cc.wechat.handle.MenuTextMessageHandle;
 import cc.wechat.handle.DefaultMessageHandle;
 import cc.wechat.handle.MenuEventHandle;
 import cc.wechat.handle.RobotMessageHandle;
@@ -26,7 +26,6 @@ import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
-import cc.wechat.service.context.ContextService;
 import cc.wechat.service.session.SessionService;
 
 @RestController
@@ -44,9 +43,10 @@ public class WechatController extends WeixinControllerSupport {
 	@Autowired
 	private DefaultMessageHandle defaultMessageHandle;
 	@Autowired
-	private RobotMessageHandle robotMessageHandle;
+	private MenuTextMessageHandle menuTextMessageHandle;
 	@Autowired
-	private ContextMessageHandle contextMessageHandle;
+	private RobotMessageHandle robotMessageHandle;
+
 	
 	/**
 	 * js指纹验证
@@ -72,9 +72,9 @@ public class WechatController extends WeixinControllerSupport {
 		// TODO Auto-generated method stub
 		System.err.println("autowire SUCCESS:" + (menuEventHandle != null));
 		List<MessageHandle> handles = new ArrayList<MessageHandle>();
-		handles.add(contextMessageHandle);
-		handles.add(robotMessageHandle);
 		handles.add(defaultMessageHandle);
+		handles.add(menuTextMessageHandle);
+		handles.add(robotMessageHandle);
 		return handles;
 	}
 

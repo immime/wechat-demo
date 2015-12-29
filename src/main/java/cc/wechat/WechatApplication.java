@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.h2.server.web.WebServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
@@ -15,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import cc.wechat.config.AppConfig;
 import cc.wechat.config.WechatProperties;
+import cc.wechat.init.SystemInitializer;
 
 @SpringBootApplication
 @EnableScheduling
@@ -24,6 +26,9 @@ public class WechatApplication {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WechatApplication.class);
 	
+	@Autowired
+	private SystemInitializer initializer;
+	
 	@PostConstruct
 	public void logSomething() {
 		logger.trace("------------------------------------------Active Log Level [Trace]------------------------------------------");
@@ -31,6 +36,7 @@ public class WechatApplication {
 		logger.warn("------------------------------------------Active Log Level [Warn]------------------------------------------");
 		logger.error("------------------------------------------Active Log Level [Error]------------------------------------------");
 		logger.debug("------------------------------------------Active Log Level [Debug]------------------------------------------");
+		initializer.initContextMenu();
 	}
 
 	public static void main(String[] args) throws Exception {
