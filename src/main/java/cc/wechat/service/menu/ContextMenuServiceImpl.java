@@ -27,7 +27,6 @@ public class ContextMenuServiceImpl implements ContextMenuService {
 	
 	@Override
 	public ContextMenu findByCode(String code) {
-		// TODO Auto-generated method stub
 		Assert.notNull(code, "Parameter 'code' must not be null");
 		ContextMenu menu = contextMenuRepository.findOne(code);
 		return menu;
@@ -35,8 +34,11 @@ public class ContextMenuServiceImpl implements ContextMenuService {
 	
 	@Override
 	public Iterable<ContextMenu> findChildren(String code) {
-		// TODO Auto-generated method stub
-
+		Assert.notNull(code, "Parameter 'code' must not be null");
+		ContextMenu menu = contextMenuRepository.findOne(code);
+		if(menu != null) {
+			return menu.getChildren();
+		}
 		return null;
 	}
 
@@ -62,5 +64,6 @@ public class ContextMenuServiceImpl implements ContextMenuService {
 		}
 		return false;
 	}
+
 
 }

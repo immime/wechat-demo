@@ -3,9 +3,12 @@ package cc.wechat.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +27,9 @@ import cc.wechat.sdk.handle.EventHandle;
 import cc.wechat.sdk.handle.MessageHandle;
 import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
+import cc.wechat.sdk.message.req.BaseReq;
 import cc.wechat.sdk.message.req.BaseReqEvent;
+import cc.wechat.sdk.message.req.BaseReqMsg;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
 import cc.wechat.service.session.SessionService;
 
@@ -38,14 +43,14 @@ public class WechatController extends WeixinControllerSupport {
 	private ApiConfigCenter apiConfigCenter;
 	@Autowired
 	private SessionService sessionService;
-	@Autowired
-	private MenuEventHandle menuEventHandle;
-	@Autowired
-	private DefaultMessageHandle defaultMessageHandle;
-	@Autowired
-	private MenuTextMessageHandle menuTextMessageHandle;
-	@Autowired
-	private RobotMessageHandle robotMessageHandle;
+	@Resource(name = "menuEventHandle")
+	private EventHandle<BaseReq> menuEventHandle;
+	@Resource(name = "defaultMessageHandle")
+	private MessageHandle<BaseReq> defaultMessageHandle;
+	@Resource(name = "menuTextMessageHandle")
+	private MessageHandle<BaseReq> menuTextMessageHandle;
+	@Resource(name = "robotMessageHandle")
+	private MessageHandle<BaseReq> robotMessageHandle;
 
 	
 	/**
@@ -66,23 +71,21 @@ public class WechatController extends WeixinControllerSupport {
 		return TOKEN;
 	}
 	
-	@SuppressWarnings("rawtypes")
 	@Override
-	protected List<MessageHandle> initMessageHandles() {
+	protected List<MessageHandle<BaseReq>> initMessageHandles() {
 		// TODO Auto-generated method stub
 		System.err.println("autowire SUCCESS:" + (menuEventHandle != null));
-		List<MessageHandle> handles = new ArrayList<MessageHandle>();
+		List<MessageHandle<BaseReq>> handles = new ArrayList<MessageHandle<BaseReq>>();
 		handles.add(defaultMessageHandle);
 		handles.add(menuTextMessageHandle);
 		handles.add(robotMessageHandle);
 		return handles;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	protected List<EventHandle> initEventHandles() {
+	protected List<EventHandle<BaseReq>> initEventHandles() {
 		// TODO 个人订阅号开发者模式的自定义菜单无效
-		List<EventHandle> handles = new ArrayList<EventHandle>();
+		List<EventHandle<BaseReq>> handles = new ArrayList<EventHandle<BaseReq>>();
 		handles.add(menuEventHandle);
 		return handles;
 	}

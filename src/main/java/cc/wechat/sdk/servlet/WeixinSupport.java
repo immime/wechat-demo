@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EnumType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -64,18 +63,18 @@ public abstract class WeixinSupport {
 	/**
 	 * 微信消息处理器列表
 	 */
-	private static List<MessageHandle> messageHandles;
+	private static List<MessageHandle<BaseReq>> messageHandles;
 	/**
 	 * 微信事件处理器列表
 	 */
-	private static List<EventHandle> eventHandles;
+	private static List<EventHandle<BaseReq>> eventHandles;
 
 	/**
 	 * 子类重写，加入自定义的微信消息处理器，细化消息的处理
 	 *
 	 * @return 微信消息处理器列表
 	 */
-	protected List<MessageHandle> initMessageHandles() {
+	protected List<MessageHandle<BaseReq>> initMessageHandles() {
 		return null;
 	}
 
@@ -84,7 +83,7 @@ public abstract class WeixinSupport {
 	 *
 	 * @return 微信事件处理器列表
 	 */
-	protected List<EventHandle> initEventHandles() {
+	protected List<EventHandle<BaseReq>> initEventHandles() {
 		return null;
 	}
 
@@ -178,21 +177,21 @@ public abstract class WeixinSupport {
 				} else {
 					buildBasicEvent(reqMap, event);
 				}
+				reqMsg = event;
 				respMsg = handleSubscribe(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case unsubscribe: {
 				BaseReqEvent event = new BaseReqEvent();
 				buildBasicEvent(reqMap, event);
+				reqMsg = event;
 				respMsg = handleUnsubscribe(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case CLICK: {
@@ -200,11 +199,11 @@ public abstract class WeixinSupport {
 				LOG.debug("eventKey:{}", eventKey);
 				MenuEvent event = new MenuEvent(eventKey);
 				buildBasicEvent(reqMap, event);
+				reqMsg = event;
 				respMsg = handleMenuClickEvent(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case VIEW: {
@@ -212,11 +211,11 @@ public abstract class WeixinSupport {
 				LOG.debug("eventKey:{}", eventKey);
 				MenuEvent event = new MenuEvent(eventKey);
 				buildBasicEvent(reqMap, event);
+				reqMsg = event;
 				respMsg = handleMenuViewEvent(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case location: {
@@ -225,42 +224,45 @@ public abstract class WeixinSupport {
 				double precision = Double.parseDouble((String) reqMap.get("Precision"));
 				LocationEvent event = new LocationEvent(latitude, longitude, precision);
 				buildBasicEvent(reqMap, event);
+				reqMsg = event;
 				respMsg = handleLocationEvent(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case scancode_push:
 			case scancode_waitmsg: {
 				String eventKey = (String) reqMap.get("EventKey");
+				@SuppressWarnings("unchecked")
 				Map<String, Object> scanCodeInfo = (Map<String, Object>) reqMap.get("ScanCodeInfo");
 				String scanType = (String) scanCodeInfo.get("ScanType");
 				String scanResult = (String) scanCodeInfo.get("ScanResult");
 				ScanCodeEvent event = new ScanCodeEvent(eventKey, scanType, scanResult);
 				buildBasicEvent(reqMap, event);
+				reqMsg = event;
 				respMsg = handleScanCodeEvent(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case pic_photo_or_album:
 			case pic_sysphoto:
 			case pic_weixin: {
 				String eventKey = (String) reqMap.get("EventKey");
+				@SuppressWarnings("unchecked")
 				Map<String, Object> sendPicsInfo = (Map<String, Object>) reqMap.get("SendPicsInfo");
 				int count = Integer.parseInt((String) sendPicsInfo.get("Count"));
-				List<Map> picList = (List) sendPicsInfo.get("PicList");
+				@SuppressWarnings("unchecked")
+				List<Map<String, Object>> picList = (List<Map<String, Object>>) sendPicsInfo.get("PicList");
 				SendPicsInfoEvent event = new SendPicsInfoEvent(eventKey, count, picList);
 				buildBasicEvent(reqMap, event);
+				reqMsg = event;
 				respMsg = handlePSendPicsInfoEvent(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case TEMPLATESENDJOBFINISH: {
@@ -269,10 +271,10 @@ public abstract class WeixinSupport {
 				TemplateMsgEvent event = new TemplateMsgEvent(msgId, status);
 				buildBasicEvent(reqMap, event);
 				respMsg = handleTemplateMsgEvent(event);
+				reqMsg = event;
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			case MASSSENDJOBFINISH: {
@@ -285,11 +287,11 @@ public abstract class WeixinSupport {
 				SendMessageEvent event = new SendMessageEvent(msgId, status, TotalCount, filterCount, sentCount,
 						errorCount);
 				buildBasicEvent(reqMap, event);
+				reqMsg = event;
 				respMsg = callBackAllMessage(event);
 				if (isNull(respMsg)) {
 					respMsg = processEventHandle(event);
 				}
-				reqMsg = event;
 				break;
 			}
 			default:
@@ -302,11 +304,12 @@ public abstract class WeixinSupport {
 			LOG.debug("文本消息内容:{}", content);
 			TextReqMsg textReqMsg = new TextReqMsg(content);
 			buildBasicReqMsg(reqMap, textReqMsg);
+			reqMsg = textReqMsg;
 			respMsg = handleTextMsg(textReqMsg);
 			if (isNull(respMsg)) {
 				respMsg = processMessageHandle(textReqMsg);
 			}
-			reqMsg = textReqMsg;
+			
 			break;
 		}
 		case image: {
@@ -314,11 +317,11 @@ public abstract class WeixinSupport {
 			String mediaId = (String) reqMap.get("MediaId");
 			ImageReqMsg imageReqMsg = new ImageReqMsg(picUrl, mediaId);
 			buildBasicReqMsg(reqMap, imageReqMsg);
+			reqMsg = imageReqMsg;
 			respMsg = handleImageMsg(imageReqMsg);
 			if (isNull(respMsg)) {
 				respMsg = processMessageHandle(imageReqMsg);
 			}
-			reqMsg = imageReqMsg;
 			break;
 		}
 		case voice: {
@@ -327,23 +330,23 @@ public abstract class WeixinSupport {
 			String recognition = (String) reqMap.get("Recognition");
 			VoiceReqMsg voiceReqMsg = new VoiceReqMsg(mediaId, format, recognition);
 			buildBasicReqMsg(reqMap, voiceReqMsg);
+			reqMsg = voiceReqMsg;
 			respMsg = handleVoiceMsg(voiceReqMsg);
 			if (isNull(respMsg)) {
 				respMsg = processMessageHandle(voiceReqMsg);
 			}
-			reqMsg = voiceReqMsg;
 			break;
 		}
 		case video: {
 			String thumbMediaId = (String) reqMap.get("ThumbMediaId");
 			String mediaId = (String) reqMap.get("MediaId");
 			VideoReqMsg videoReqMsg = new VideoReqMsg(mediaId, thumbMediaId);
-			buildBasicReqMsg(reqMap, videoReqMsg);
+			buildBasicReqMsg(reqMap, videoReqMsg);			
+			reqMsg = videoReqMsg;
 			respMsg = handleVideoMsg(videoReqMsg);
 			if (isNull(respMsg)) {
 				respMsg = processMessageHandle(videoReqMsg);
 			}
-			reqMsg = videoReqMsg;
 			break;
 		}
 		case shortvideo: {
@@ -351,11 +354,11 @@ public abstract class WeixinSupport {
 			String mediaId = (String) reqMap.get("MediaId");
 			VideoReqMsg videoReqMsg = new VideoReqMsg(mediaId, thumbMediaId);
 			buildBasicReqMsg(reqMap, videoReqMsg);
+			reqMsg = videoReqMsg;
 			respMsg = hadnleShortVideoMsg(videoReqMsg);
 			if (isNull(respMsg)) {
 				respMsg = processMessageHandle(videoReqMsg);
 			}
-			reqMsg = videoReqMsg;
 			break;
 		}
 		case location: {
@@ -365,11 +368,11 @@ public abstract class WeixinSupport {
 			String label = (String) reqMap.get("Label");
 			LocationReqMsg locationReqMsg = new LocationReqMsg(locationX, locationY, scale, label);
 			buildBasicReqMsg(reqMap, locationReqMsg);
+			reqMsg = locationReqMsg;
 			respMsg = handleLocationMsg(locationReqMsg);
 			if (isNull(respMsg)) {
 				respMsg = processMessageHandle(locationReqMsg);
 			}
-			reqMsg = locationReqMsg;
 			break;
 		}
 		case link: {
@@ -379,11 +382,11 @@ public abstract class WeixinSupport {
 			LOG.debug("链接消息地址:{}", url);
 			LinkReqMsg linkReqMsg = new LinkReqMsg(title, description, url);
 			buildBasicReqMsg(reqMap, linkReqMsg);
+			reqMsg = linkReqMsg;
 			respMsg = handleLinkMsg(linkReqMsg);
 			if (isNull(respMsg)) {
 				respMsg = processMessageHandle(linkReqMsg);
 			}
-			reqMsg = linkReqMsg;
 		}
 		default:
 			break;
@@ -414,7 +417,7 @@ public abstract class WeixinSupport {
 			}
 		}
 		if (isNotEmpty(messageHandles)) {
-			for (MessageHandle messageHandle : messageHandles) {
+			for (MessageHandle<BaseReq> messageHandle : messageHandles) {
 				BaseMsg resultMsg = null;
 				boolean result;
 				try {
@@ -440,7 +443,7 @@ public abstract class WeixinSupport {
 			}
 		}
 		if (isNotEmpty(eventHandles)) {
-			for (EventHandle eventHandle : eventHandles) {
+			for (EventHandle<BaseReq> eventHandle : eventHandles) {
 				BaseMsg resultMsg = null;
 				boolean result;
 				try {

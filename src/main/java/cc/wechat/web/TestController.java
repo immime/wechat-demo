@@ -50,6 +50,6 @@ public class TestController {
 	@Transactional(readOnly = true)
 	public String findMenuByCode(@PathVariable String code) {
 		ContextMenu menu = contextMenuService.findByCode(code);
-		return menu.toString();
+		return menu.getDisplayName();
 	}
 }

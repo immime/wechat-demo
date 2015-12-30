@@ -1,6 +1,6 @@
 package cc.wechat.service.context;
 
-import java.util.Iterator;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import cc.wechat.constant.WechatConsts;
 import cc.wechat.data.domain.ContextMenu;
 import cc.wechat.service.context.bean.ReqContext;
-import cc.wechat.service.menu.ContextMenuService;
 import cc.wechat.service.session.SessionService;
 
 @Service
@@ -16,8 +15,6 @@ public class ContextServiceImpl implements ContextService {
 
 	@Autowired
 	private SessionService sessionService;
-	@Autowired
-	private ContextMenuService contextMenuService;
 
 	@Override
 	public ReqContext getContext(String fromUsername) {
@@ -43,24 +40,13 @@ public class ContextServiceImpl implements ContextService {
 	}
 
 	@Override
-	public String getHelpText() {
-		StringBuilder sb = new StringBuilder("========帮助=======\n");
-		sb.append("1.回复m显示菜单\n")
-		.append("2.回复h显示帮助\n")
-		.append("3.回复q退出.n");
-		return sb.toString();
-	}
-
-	@Override
-	public String getMenuText() {
-		StringBuilder sb = new StringBuilder("========菜单=======\n");
-		Iterable<ContextMenu> it = contextMenuService.findAll();
-		Iterator<ContextMenu> menus = it.iterator();
-		while(menus.hasNext()) {
-			ContextMenu m = menus.next();
-			sb.append(m.getCode()).append("-").append(m.getDisplayName()).append("\n");
+	public String getMenuText(ContextMenu menu) {
+		StringBuilder sb = new StringBuilder("========").append(menu.getDisplayName()).append("=======\n");
+		Set<ContextMenu> children = menu.getChildren();
+		for (ContextMenu m : children) {
+			sb.append(m.getNode()).append(".").append(m.getDisplayName()).append("\n");
 		}
-		sb.append("===回复对应的序号===");
+		sb.append("(回复对应的序号)");
 		return sb.toString();
 	}
 

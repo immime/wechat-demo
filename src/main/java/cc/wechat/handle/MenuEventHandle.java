@@ -25,7 +25,7 @@ import cc.wechat.service.weather.bean.CityParam;
  * @author weny
  * @datetime 2015年12月29日 下午1:47:26
  */
-@Component
+@Component(value="menuEventHandle")
 public class MenuEventHandle implements EventHandle<BaseReqEvent> {
 
 	@Autowired

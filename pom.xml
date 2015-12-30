@@ -33,11 +33,6 @@
 	</properties>
 
 	<dependencies>
-		<!-- Add yaml style config file supports. -->
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-		</dependency>
 		<!-- Add Web based Endpoints like health,beans etc. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

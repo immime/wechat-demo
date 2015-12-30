@@ -7,9 +7,9 @@ public class SendPicsInfoEvent extends BaseReqEvent {
 	
 	private String eventKey;
 	private Integer count;
-	private List<Map> picList;
+	private List<Map<String, Object>> picList;
 	
-	public SendPicsInfoEvent(String eventKey, Integer count, List<Map> picList) {
+	public SendPicsInfoEvent(String eventKey, Integer count, List<Map<String, Object>> picList) {
 		super();
 		this.eventKey = eventKey;
 		this.count = count;
@@ -32,11 +32,11 @@ public class SendPicsInfoEvent extends BaseReqEvent {
 		this.count = count;
 	}
 
-	public List<Map> getPicList() {
+	public List<Map<String, Object>> getPicList() {
 		return picList;
 	}
 
-	public void setPicList(List<Map> picList) {
+	public void setPicList(List<Map<String, Object>> picList) {
 		this.picList = picList;
 	}
 

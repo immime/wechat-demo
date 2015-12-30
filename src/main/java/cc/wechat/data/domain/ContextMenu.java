@@ -26,7 +26,13 @@ public class ContextMenu extends BaseEntity {
 	private String code;
 	
 	@Column(nullable = false)
+	private String node;
+	
+	@Column(nullable = false)
 	private String displayName;
+	
+	@Column
+	private String endpoint;
 	
 	/**父组织*/
     @ManyToOne
@@ -34,9 +40,9 @@ public class ContextMenu extends BaseEntity {
     private ContextMenu parent;
     
     /**子组织*/
-    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name="parent_code")
-    @OrderBy("code asc")
+    @OrderBy("node asc")
     private Set<ContextMenu> children = new HashSet<ContextMenu>();
 
 	public String getCode() {
@@ -47,12 +53,28 @@ public class ContextMenu extends BaseEntity {
 		this.code = code;
 	}
 
+	public String getNode() {
+		return node;
+	}
+
+	public void setNode(String node) {
+		this.node = node;
+	}
+
 	public String getDisplayName() {
 		return displayName;
 	}
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
 	}
 
 	public ContextMenu getParent() {

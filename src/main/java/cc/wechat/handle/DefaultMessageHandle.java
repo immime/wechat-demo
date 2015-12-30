@@ -32,32 +32,7 @@ public class DefaultMessageHandle implements MessageHandle<BaseReqMsg> {
 	public BaseMsg handle(BaseReqMsg message) {
 		// TODO Auto-generated method stub
 		System.err.println("*****************cc.wechat.handle.DefaultMessageHandle<BaseReqMsg>****************");
-		ReqContext context = contextService.getContext(message.getFromUserName());
-		if(context != null && !context.getIsActive()) {
-			return null;
-		}
-		if (message instanceof TextReqMsg) {
-			TextReqMsg reqMsg = (TextReqMsg) message;
-			String inStr = reqMsg.getContent();
-			String outStr = null;
-			if (StringUtils.isNotEmpty(inStr)) {
-				if ("m".equalsIgnoreCase(inStr)) {
-					outStr = contextService.getMenuText();
-				}
-				if ("h".equalsIgnoreCase(inStr)) {
-					outStr = contextService.getHelpText();
-				}
-				if ("q".equalsIgnoreCase(inStr)) {
-					context.setIsActive(false);
-				}
-			}
-			if (StringUtils.isNotEmpty(outStr)) {
-				TextMsg msg = new TextMsg();
-				msg.add(outStr);
-				return msg;
-			}
 
-		}
 		return null;
 	}
 
