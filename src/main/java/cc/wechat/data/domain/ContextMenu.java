@@ -2,6 +2,7 @@ package cc.wechat.data.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,10 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration.GitInfo;
 
 @Entity
-public class ContextMenu extends BaseEntity {
+public class ContextMenu extends BaseEntity implements Comparable {
 
 	private static final long serialVersionUID = 3339126454114661937L;
 	
@@ -92,5 +95,54 @@ public class ContextMenu extends BaseEntity {
 	public void setChildren(Set<ContextMenu> children) {
 		this.children = children;
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		ContextMenu m = (ContextMenu) o;
+		String thisCode = this.getCode();
+		String targetCode = m.getCode();
+			
+		if(thisCode.equals(targetCode)) {
+			return 0;
+		} 
+		
+		String[] targetArr = targetCode.split("_");
+		String[] thisArr = thisCode.split("_");
+		
+		if(targetArr.length > thisArr.length) {
+			return 1;
+		}
+		if (targetArr.length < thisArr.length) {
+			return -1;
+		}
+		if (targetArr.length == thisArr.length) {
+			int result = -1;
+			for (int i = 0; i < thisArr.length; i++) {
+				int targetNode = Integer.valueOf(targetArr[i]);
+				int thisNode = Integer.valueOf(thisArr[i]);
+				if(targetNode > thisNode) {
+					result = 1;
+				}
+			}
+			return result;
+		}
+		
+		return -1;
+	}
+	
+	//////////////////////////////////////// 
+	// test code
+	////////////////////////////////////////
+//	public static void main(String[] args) {
+//		ContextMenu m1 = new ContextMenu();
+//		m1.setCode("0_1_2_");
+//		ContextMenu m2 = new ContextMenu();
+//		m2.setCode("0_1_2_");
+//		
+//		System.err.println(m1.compareTo(m2));
+//		
+////		String[] arr = "".split("_");
+////		System.err.println(arr.toString());
+//	}
 	
 }

@@ -42,45 +42,44 @@ public class MenuTextMessageHandle implements MessageHandle<BaseReqMsg> {
 		
 		if (message instanceof TextReqMsg) {
 			TextReqMsg inMsg = (TextReqMsg) message;
+			String inStr = inMsg.getContent();
+			String code = inStr.concat("_");
 			
 			ReqContext context = contextService.getContext(message.getFromUserName());
 			if(context == null) {
-				context = new ReqContext(inMsg.getFromUserName(), inMsg.getMsgType(), inMsg);
-			}
-			
-			String inStr = inMsg.getContent();
-			String outStr = null;
-			if (StringUtils.isNotEmpty(inStr)) {
-				if ("m".equalsIgnoreCase(inStr)) {
-					ContextMenu main = menuNavigate.direct("0_1_");
-					outStr = contextService.getMenuText(main);
-					context.setMenu(main);
-					contextService.updateContext(context);
+				if(inStr.equals("m")) {
+					code = "0_1_";
 				}
-				else if ("h".equalsIgnoreCase(inStr)) {
-					ContextMenu help = menuNavigate.direct("0_2_");
-					outStr = contextService.getMenuText(help);
-					context.setMenu(help);
-					contextService.updateContext(context);
+				if(inStr.equals("h")) {
+					code = "0_2_";
 				}
-				else if ("q".equalsIgnoreCase(inStr)) {
-					context.setMenu(null);
-					contextService.updateContext(context);
-					outStr = "已退出回话！";
+				
+				ContextMenu direct = menuNavigate.direct(code);
+				if(direct == null) {
+					return null;
 				}
-				else {
-					ContextMenu menu = context.getMenu();
-					if(menu == null) {
-						return null;
-					}
-					outStr = process(inStr, context, menu);
-					if(StringUtils.isEmpty(outStr)) {
-						outStr = contextService.getMenuText(menu).concat("\n").concat("请选择正确的序号");
-					}
-				}
+				String outStr = contextService.getMenuText(direct).concat("\n");
 				TextMsg outMsg = new TextMsg();
 				outMsg.add(outStr);
 				return outMsg;
+			}
+			
+			if (StringUtils.isNotEmpty(inStr)) {
+				ContextMenu menu = context.getMenu();
+				if (menu == null) {
+					String outStr = null;
+					ContextMenu direct = menuNavigate.direct(code);
+					if (direct == null) {
+						outStr = contextService.getMenuText(menu).concat("\n").concat("请选择正确的序号");
+					} else {
+						outStr = process(inStr, context, menu);
+					}
+					TextMsg outMsg = new TextMsg();
+					outMsg.add(outStr);
+					return outMsg;
+				} else {
+					return null;
+				}
 			}
 
 		}

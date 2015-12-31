@@ -12,19 +12,19 @@ public class MenuNavigateImpl implements MenuNavigate {
 	private ContextMenuService contextMenuService;
 
 	@Override
-	public ContextMenu current(String currentCrumb) {
-		return contextMenuService.findByCode(currentCrumb);
+	public ContextMenu current(String currentCode) {
+		return contextMenuService.findByCode(currentCode);
 	}
 
 	@Override
-	public ContextMenu next(String currentCrumb, String nextNode) {
-		String targetCode = currentCrumb.concat(nextNode);
+	public ContextMenu next(String currentCode, String nextNode) {
+		String targetCode = currentCode.concat(nextNode);
 		return contextMenuService.findByCode(targetCode);
 	}
 
 	@Override
-	public ContextMenu previous(String currentCrumb) {
-		ContextMenu current = contextMenuService.findByCode(currentCrumb);
+	public ContextMenu previous(String currentCode) {
+		ContextMenu current = contextMenuService.findByCode(currentCode);
 		if(current != null && current.getParent() != null) {
 			return current.getParent();
 		}
@@ -32,8 +32,8 @@ public class MenuNavigateImpl implements MenuNavigate {
 	}
 
 	@Override
-	public ContextMenu direct(String targetCrumb) {
-		return contextMenuService.findByCode(targetCrumb);
+	public ContextMenu direct(String targetCode) {
+		return contextMenuService.findByCode(targetCode);
 	}
 
 }

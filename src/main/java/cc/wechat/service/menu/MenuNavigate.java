@@ -4,9 +4,9 @@ import cc.wechat.data.domain.ContextMenu;
 
 public interface MenuNavigate {
 	
-	ContextMenu current(String currentCrumb);
-	ContextMenu next(String currentCrumb, String nextNode);
-	ContextMenu previous(String currentCrumb);
-	ContextMenu direct(String targetCrumb);
+	ContextMenu current(String currentCode);
+	ContextMenu next(String currentCode, String nextNode);
+	ContextMenu previous(String currentCode);
+	ContextMenu direct(String targetCode);
 	
 }
