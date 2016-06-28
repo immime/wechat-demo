@@ -3,6 +3,8 @@ package cc.wechat.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,9 @@ public class WechatController extends WeixinControllerSupport {
 	private SessionService sessionService;
 	@Autowired
 	private EventHandle<BaseReqEvent> menuEventHandle;
+	@Resource(name="defaultMessageHandle")
 	private MessageHandle<BaseReqEvent> defaultMessageHandle;
+	@Resource(name="robotMessageHandle")
 	private MessageHandle<BaseReqEvent> robotMessageHandle;
 	
 	/**
@@ -45,7 +49,7 @@ public class WechatController extends WeixinControllerSupport {
 	 * @return
 	 */
 	@RequestMapping("/jsSignature")
-	public BaseResponse helloWorld(@RequestParam String url) {
+	public BaseResponse jsSignature(@RequestParam String url) {
 		ApiConfig config = apiConfigCenter.getConfig();
 		JsAPI api = new JsAPI(config);
 		GetSignatureResponse response = api.getSignature(url);

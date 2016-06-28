@@ -18,7 +18,7 @@ public class Joke extends BaseEntity {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private String id;
 	/**
 	 * 时间
 	 */
@@ -42,10 +42,10 @@ public class Joke extends BaseEntity {
 	@Column(nullable = false, length=3000)
 	private String text;
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String	 id) {
 		this.id = id;
 	}
 	public Date getCt() {

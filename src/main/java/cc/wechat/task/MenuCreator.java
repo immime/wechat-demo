@@ -44,7 +44,7 @@ public class MenuCreator {
         //准备子菜单
         MenuButton sub1 = new MenuButton();
         sub1.setKey(MenuConstant.MENU_CLICK_FUNC_WEATHER);
-        sub1.setName("查天气");
+        sub1.setName("查文章");
         sub1.setType(MenuType.CLICK);
         
         MenuButton sub2 = new MenuButton();
@@ -60,10 +60,28 @@ public class MenuCreator {
         
         //准备一级主菜单
         MenuButton main2 = new MenuButton();
-        main2.setType(MenuType.VIEW);
+        main2.setType(MenuType.CLICK);
         main2.setKey(MenuConstant.MENU_CLICK_PAGE);
         main2.setName("JS-demo页面");
-        main2.setUrl("http://qiqi.localtunnel.me/views/demo.html");
+        
+        //准备子菜单
+        MenuButton main2Sub1 = new MenuButton();
+        main2Sub1.setKey(MenuConstant.MENU_CLICK_PAGE_DEMO);
+        main2Sub1.setName("JS-demo页面");
+        main2Sub1.setType(MenuType.VIEW);
+        main2Sub1.setUrl("http://qiqi.localtunnel.me/views/demo.html");
+        
+        MenuButton main2Sub2 = new MenuButton();
+        main2Sub2.setKey(MenuConstant.MENU_CLICK_PAGE_DEVICE);
+        main2Sub2.setName("智能设备");
+        main2Sub2.setType(MenuType.VIEW);
+        main2Sub2.setUrl("http://qiqi.localtunnel.me/views/device_index.html");
+        
+        List<MenuButton> list2 = new ArrayList<MenuButton>();
+        list2.add(main2Sub1);
+        list2.add(main2Sub2);
+        //将子菜单放入主菜单里
+        main2.setSubButton(list2);
         
 
         List<MenuButton> mainList = new ArrayList<MenuButton>();

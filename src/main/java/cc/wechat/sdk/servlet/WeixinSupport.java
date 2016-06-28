@@ -413,9 +413,9 @@ public abstract class WeixinSupport {
 				messageHandles = this.initMessageHandles();
 			}
 		}
+		BaseMsg resultMsg = null;
 		if (isNotEmpty(messageHandles)) {
 			for (MessageHandle messageHandle : messageHandles) {
-				BaseMsg resultMsg = null;
 				boolean result;
 				try {
 					result = messageHandle.beforeHandle(msg);
@@ -424,13 +424,13 @@ public abstract class WeixinSupport {
 				}
 				if (result) {
 					resultMsg = messageHandle.handle(msg);
-				}
-				if (nonNull(resultMsg)) {
-					return resultMsg;
+					if (nonNull(resultMsg)) {
+						break;
+					}
 				}
 			}
 		}
-		return null;
+		return resultMsg;
 	}
 
 	private BaseMsg processEventHandle(BaseReqEvent event) {
