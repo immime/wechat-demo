@@ -22,6 +22,30 @@ wx.ready(function () {
       }
     });
   };
+  
+  $("#onMenuShareAppMessage").on("click", function() {
+		// 分享到QQ
+		wx.onMenuShareQQ({
+			title : '测试分享到QQ', // 分享标题
+			desc : 'qqqqqqqq', // 分享描述
+			link : '', // 分享链接
+			imgUrl : '', // 分享图标
+			success : function() {
+				// 用户确认分享后执行的回调函数
+			},
+			cancel : function() {
+				// 用户取消分享后执行的回调函数
+			}
+		});
+	});
+	
+	$('#openProductSpecificView').on('click', function () {
+		// 微信小店
+		wx.openProductSpecificView({
+		    productId: '1', // 商品id
+		    viewType: '0' // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
+		});
+	});
 
 });
 

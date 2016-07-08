@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
 import cc.wechat.service.session.SessionService;
 
+@CrossOrigin(origins = "http://wechat.liekkas.me", maxAge = 3600)
 @RestController
 @RequestMapping("/wechat")
 public class WechatController extends WeixinControllerSupport {
@@ -65,7 +67,6 @@ public class WechatController extends WeixinControllerSupport {
 	@Override
 	protected List<MessageHandle> initMessageHandles() {
 		// TODO Auto-generated method stub
-		System.err.println("autowire SUCCESS:" + (menuEventHandle != null));
 		List<MessageHandle> handles = new ArrayList<MessageHandle>();
 		handles.add(defaultMessageHandle);
 		handles.add(robotMessageHandle);

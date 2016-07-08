@@ -13,7 +13,7 @@ public class ApiConfigCenter {
 	private WechatProperties wechatProperties;
 	
 	public ApiConfig getConfig() {
-		ApiConfig config = new ApiConfig(wechatProperties.getAppID(), wechatProperties.getAppSecret());
+		ApiConfig config = new ApiConfig(wechatProperties.getAppID(), wechatProperties.getAppSecret(), wechatProperties.getEnableJsApi());
 		TestConfigChangeHandle configChangeHandle = new TestConfigChangeHandle();
 		config.addHandle(configChangeHandle);
 		return config;

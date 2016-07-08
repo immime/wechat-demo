@@ -10,6 +10,7 @@ public class WechatProperties {
 	private String appSecret;
 	private String token;
 	private String aesKey;
+	private Boolean enableJsApi;
 	
 	public String getAppID() {
 		return appID;
@@ -34,6 +35,12 @@ public class WechatProperties {
 	}
 	public void setAesKey(String aesKey) {
 		this.aesKey = aesKey;
+	}
+	public Boolean getEnableJsApi() {
+		return enableJsApi;
+	}
+	public void setEnableJsApi(Boolean enableJsApi) {
+		this.enableJsApi = enableJsApi;
 	}
 	
 }
