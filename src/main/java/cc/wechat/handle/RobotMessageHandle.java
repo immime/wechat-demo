@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cc.wechat.data.domain.Joke;
+import cc.wechat.module.joke.JokeService;
 import cc.wechat.sdk.handle.MessageHandle;
 import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqMsg;
-import cc.wechat.service.joke.JokeService;
 
 @Component(value = "robotMessageHandle")
 public class RobotMessageHandle implements MessageHandle<BaseReqMsg> {

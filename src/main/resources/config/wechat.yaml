@@ -1,0 +1,15 @@
+# app info
+wechat:
+  appID: wxe6626fc25736c77e
+  appSecret: c5ea13a94c08a1ed07fc4eaeb6ca913b
+  token: myqiqi
+  enableJsApi: true
+
+# menu
+  menuButtons:
+  - type: click
+    key: menu.click.func
+    name: \u529F\u80FD
+  - type: click
+    key: menu.click.func
+    name: \u529F\u80FD

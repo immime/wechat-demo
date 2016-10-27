@@ -31,8 +31,8 @@ import com.alibaba.fastjson.JSONObject;
 
 import cc.wechat.data.domain.Joke;
 import cc.wechat.data.service.sample.CityService;
+import cc.wechat.module.joke.JokeService;
 import cc.wechat.openapi.ApiStoreClient;
-import cc.wechat.service.joke.JokeService;
 
 @Controller
 public class SampleController {

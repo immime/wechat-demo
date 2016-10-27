@@ -1,16 +1,22 @@
 package cc.wechat.config;
 
+import java.util.List;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import cc.wechat.sdk.api.entity.MenuButton;
+
 @Component
-@ConfigurationProperties(prefix = "wechat", locations = "classpath:config/wechat.properties")
+@ConfigurationProperties(prefix = "wechat", locations = "classpath:config/wechat.yaml")
 public class WechatProperties {
 	private String appID;
 	private String appSecret;
 	private String token;
 	private String aesKey;
 	private Boolean enableJsApi;
+	
+	private List<MenuButton> menuButtons;
 	
 	public String getAppID() {
 		return appID;
@@ -41,6 +47,12 @@ public class WechatProperties {
 	}
 	public void setEnableJsApi(Boolean enableJsApi) {
 		this.enableJsApi = enableJsApi;
+	}
+	public List<MenuButton> getMainButtons() {
+		return menuButtons;
+	}
+	public void setMainButtons(List<MenuButton> mainButtons) {
+		this.menuButtons = mainButtons;
 	}
 	
 }

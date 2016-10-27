@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cc.wechat.config.ApiConfigCenter;
+import cc.wechat.module.session.SessionService;
 import cc.wechat.sdk.api.JsAPI;
 import cc.wechat.sdk.api.config.ApiConfig;
 import cc.wechat.sdk.api.response.BaseResponse;
@@ -25,7 +26,6 @@ import cc.wechat.sdk.message.BaseMsg;
 import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.servlet.WeixinControllerSupport;
-import cc.wechat.service.session.SessionService;
 
 @CrossOrigin(origins = "http://wechat.liekkas.me", maxAge = 3600)
 @RestController

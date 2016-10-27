@@ -14,9 +14,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cc.wechat.data.domain.Joke;
+import cc.wechat.module.joke.JokeService;
 import cc.wechat.openapi.ApiStoreClient;
 import cc.wechat.openapi.exception.ApiStoreException;
-import cc.wechat.service.joke.JokeService;
 
 @Component
 public class JokeTask {

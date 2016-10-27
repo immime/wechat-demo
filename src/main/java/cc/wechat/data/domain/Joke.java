@@ -1,23 +1,23 @@
 package cc.wechat.data.domain;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
 @Entity
+@Table(name="wx_joke")
 public class Joke extends BaseEntity {
 
-	private static final long serialVersionUID = -3924824580494261604L;
-	
 	@Id
-	@GeneratedValue
 	private String id;
 	/**
 	 * 时间
@@ -45,7 +45,7 @@ public class Joke extends BaseEntity {
 	public String getId() {
 		return id;
 	}
-	public void setId(String	 id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Date getCt() {

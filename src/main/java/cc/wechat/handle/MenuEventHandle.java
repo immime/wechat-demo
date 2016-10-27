@@ -4,20 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cc.wechat.constant.MenuConstant;
+import cc.wechat.module.context.IContextService;
+import cc.wechat.module.joke.JokeService;
+import cc.wechat.module.session.SessionService;
+import cc.wechat.module.weather.WeatherService;
+import cc.wechat.module.weather.vo.CityParam;
 import cc.wechat.sdk.handle.EventHandle;
 import cc.wechat.sdk.message.BaseMsg;
-import cc.wechat.sdk.message.NewsMsg;
-import cc.wechat.sdk.message.TextMsg;
 import cc.wechat.sdk.message.req.BaseReqEvent;
 import cc.wechat.sdk.message.req.MenuEvent;
-import cc.wechat.service.context.IContextService;
-import cc.wechat.service.joke.JokeService;
-import cc.wechat.service.joke.bean.Joke;
-import cc.wechat.service.session.SessionService;
-import cc.wechat.service.weather.WeatherService;
-import cc.wechat.service.weather.bean.CityParam;
-import cc.wechat.service.weather.bean.resp.Now;
-import cc.wechat.service.weather.bean.resp.Weather;
 
 @Component
 public class MenuEventHandle implements EventHandle<BaseReqEvent> {

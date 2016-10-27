@@ -10,10 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import cc.wechat.constant.WechatConsts;
+import cc.wechat.module.context.bean.LastReqInfo;
+import cc.wechat.module.session.SessionService;
 import cc.wechat.sdk.message.req.BaseReq;
-import cc.wechat.service.context.IContextService;
-import cc.wechat.service.context.bean.LastReqInfo;
-import cc.wechat.service.session.SessionService;
 import cc.wechat.utils.BeanUtil;
 import cc.wechat.web.WechatController;
 

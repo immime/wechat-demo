@@ -23,9 +23,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import cc.wechat.constant.WechatConsts;
+import cc.wechat.module.weather.vo.CityParam;
 import cc.wechat.openapi.bean.BasePostEntity;
 import cc.wechat.openapi.exception.ApiStoreException;
-import cc.wechat.service.weather.bean.CityParam;
 import cc.wechat.web.WechatController;
 
 public class ApiStoreClient {
